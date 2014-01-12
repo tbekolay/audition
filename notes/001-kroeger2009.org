@@ -1,0 +1,123 @@
+* Before reading
+** Title
+Articulatory synthesis of speech and singing:
+State of the art and suggestions for future research
+** Authors (are any notable?)
+Bernd J. Kröger (German guy who contacted us, will work with us)
+Peter Birkholz (Author of VocalTractLab)
+** Year
+2009
+** In Book
+Multimodal Signals: Cognitive and Algorithmic Issues
+** Tags
+articulatory synthesis
+** Why are you reading this paper?
+Need an introduction to articulatory synthesis
+for Comp-II, and just generally for starting
+the auditory research project.
+* During reading - Review paper
+** What is the field/issue being reviewed?
+Articulary synthesis.
+Kröger helpfully breaks it down into the modules
+that make up a synthesis system:
+1. Control model (generates vocal tract movements)
+2. Vocal tract model
+   (converts movements into continuous vocal tract geometries)
+3. Acoustic model (converts geometries to acoustic signals)
+He notes that the area that really needs to be improved
+is the control model,
+which is very conveniently the area in which
+we can make the most contributions.
+** Important studies cited
+The state of the art is summarized.
+*** 1. Control models
+1. Segmental control models: phonological description of an utterance.
+   basically, here's a list of syllables and timestamps, and the goal
+   is to change vocal tract to be making a particular syllable at a
+   particular time. The only English citation is Kröger, 1992
+2. Action based control models (gestural control models): phonological
+   description + prosodic annotation of an utterance. Somehow produces
+   a high-level representation of a (discrete?) motor plan, which is
+   converted to a low-level phonetic articulatory description by
+   inverse dynamics. Birkholz 2007 is highlighted, though there are
+   other citations that might be worth checking out: Saltzman and
+   Munhall 1989, Browman and Goldstein 1992, Kröger 1993, Saltzman and
+   Byrd 2000, Goldstein et al. 2006, Birkholz et al. 2006, Kröger and
+   Birkholz 2007
+*** 2. Vocal tract models
+1. Statistical models: build up a statistical model of syllable to
+   some kind of imaging (MRI, X-Ray). Cites: Maeda 1988, Beautemps et
+   al. 2001, Badin et al. 2002, Serrurier and Badin 2008.
+2. Biomechanical models: model physiology of vocal tract and
+   neuromuscular control. Cites: Wilhelms-Tricarico 1995, Dang 2004.
+3. Geometric models: model position and shape of vocal tract with a
+   set of a priori parameters. Cites: Mermelstein 1973, Kröger 1998,
+   Engwall 2003, Birkholz et al. 2006.
+*** 3. Acoustic models
+1. Reflection type line analog models: uses scattering equations on
+   pressure waves to calculate forward and backward pressure and flow.
+   Big weakness is that it can't calculate vocal tract length changes
+   over time. Cites: Kelly and Lochbaum 1962, Liljencrants 1985, Meyer
+   et al. 1989, Kröger 1998.
+2. Transmission line circuit analog models: electrical circuit elements
+   represent the acoustic and aerodynamic properties in each vocal
+   tract tube section. Vocal tract length can change, but there are
+   weaknesses in representing some frequency dependent losses.
+   Cites:  Flanagan 1975, Maeda 1982, Birkholz et al. 2007.
+3. Hybrid time-frequency domain models: represent the transfer function
+   between vocal tract sections in the frequency domain. Seems accurate,
+   but very computationally expensive. Cites: Allen and Strong 1985,
+   Sondhi and Schroeter 1987.
+4. Finite element wave propagation models: acoustics and aerodynamics
+   are directly calculated with physics equations. Very comptuationally
+   expensive, and usually used for things other than the acoustic model.
+   Cites: El-Masri et al. 1996, Mazsuzaki and Motoki 2000.
+
+There appear to be two additional parts fo the acoustic model:
+the glottis model, which generates the acoustic signal source
+that goes through the vocal tract. There are self-oscillating
+(Ishizaka and Flanagan 1972, Cranen and Boves 1987, Story and Titze 1995,
+Kröger 1998, Alipour et al. 2000, Kob 2002),
+parametric glottal area models (Titze 1989, Cranen and Schroeter 1996),
+and parametric glottal flow models (Fant et al. 1985).
+
+Finally, there are also noise source models that generate
+and insert noise signals into the acoustic transmission line model.
+There are parametric noise source models
+(Mawass et al. 2000, Birkholz et al. 2007)
+and generic noise source models (Sinder 1999)
+
+Right now, it's a little bit unclear to me
+how all these things fit together.
+Code examples and detailed papers will be instructive.
+** Is there a bias in the review? I.e., are they trying to prove something
+There is a slight bias for what seems like
+the techniques that Birkholz uses.
+The main point of the paper, though,
+is that there's lots of work on other things
+except control, perhaps because it's quite hard.
+Kröger is advocating for an interactive
+learning procedure in which a sensory system
+provides feedback to a control system
+in order to produce good sounds.
+I'm in agreement.
+** Figures of note (to replicate / steal)
+The figures are kind of weak.
+** List of unfamiliar terms / ideas to look up later
+See above!
+* After reading
+** Overall impression (good paper, brutal, etc)
+This was a really nice introduction to these ideas.
+A lot of things were not explained very clearly,
+but it's great to have all of the work
+organized so well.
+I think this was the ideal paper to read,
+and now I have pointers to a bunch more papers
+when I need to know more about each
+element of articulatory synthesis.
+** Closely related papers and how this compares to them
+This is the first I've read.
+** Todo [3/3]
+- [X] Brainstorm research ideas and put on a separate list
+- [X] Transfer list of unfamiliar terms elsewhere and define
+- [X] Review bibliography and download interesting
