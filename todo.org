@@ -1,3 +1,8 @@
 * DONE Careful read of Kröger, 2009
+* DONE Careful read of Kröger, 1992
+* Careful read of a good Birkholz paper (then move on to cochlea model)
 * Outline of Comp-II
-* Careful read of Kröger, 1992
+** Question 1: Can current vocal tract models actually give good speech?
+** Answer 1: Use unconstrained learning to generate a target sound.
+** Question 2: Can this be done in a biologically plausible manner?
+** Answer 2: Do learning in NEF.

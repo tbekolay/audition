@@ -1,0 +1,67 @@
+* Before reading
+** Title
+Minimal rules for articulatory speech synthesis
+** Authors (are any notable?)
+Bernd J. Kröger (Bernd!)
+** Year
+1992
+** Book
+Signal Processing VI: Theories and Applications
+** Tags
+articular synthesis, segmental control models
+** Why are you reading this paper?
+In Kröger 2009, this was cited as the only
+segmental control model. While action-based
+seems to be the way to go, it's good to
+figure out what's happening in these.
+Since it should be shorter, I went
+with these first.
+* During reading - Research paper
+** What is the central question of the paper?
+How does one control a vocal tract model?
+** Hypothesis
+Basically, map from syllable to a 10-D vector
+of control commands that should emit the right sound.
+** Summary of methods (theoretical or experimental)
+The main interesting part here seems to be that
+you can have a "free articulator movement"
+or a "limited articulator movement".
+Free movements are just a target that you typically reach
+in the middle of the time you're voicing a syllable.
+Limited movements are typically when an articulator
+is pressed against another one;
+you want to have this value throughout the whole time
+you're voicing a syllable.
+Or, it can be passive, meaning it doesn't matter.
+This sets up a pretty loose set of goals over
+the time you're voicing an utterance,
+meaning you can smoothly blend in between things
+resulting in a somewhat natural sound.
+** Assumptions
+This is just control; we're assuming we have
+the syllables, time labels, and the vocal tract model.
+** Summary of results
+No strong results, just an example utterance.
+** Authors' claims (what is significant?)
+He claims that the variation due to underspecification
+results in relatively realistic sounds.
+** Are those claims supported?
+It's hard to tell without examples.
+** Are those claims important?
+They are.
+** Figures of note (to replicate / steal)
+Again, relatively weak figures.
+** List of unfamiliar terms / ideas to look up later
+Possibly the Browman and Goldstein 1987 paper?
+* After reading
+** Overall impression (good paper, brutal, etc)
+Very light on details. The idea seems pretty obvious to me.
+It's curious that the results are pretty light too;
+is there no way to quantify the "goodness"
+of synthesized sound?
+** Closely related papers and how this compares to them
+This is the first control paper I've read;
+** Todo [3/3]
+- [X] Brainstorm research ideas and put on a separate list
+- [X] Transfer list of unfamiliar terms elsewhere and define
+- [X] Review bibliography and download interesting
