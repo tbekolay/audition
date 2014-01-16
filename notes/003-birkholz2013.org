@@ -1,0 +1,99 @@
+* Before reading
+** Title
+Modeling consonant-vowel coarticulation
+for articulatory speech synthesis
+** Authors (are any notable?)
+Peter Birkholz (VocalTractLab guy)
+** Year
+2013
+** Journal
+PLoS One
+** Tags
+articular synthesis, consonant-vowel coarticulation,
+action based control
+** Why are you reading this paper?
+I read Kröger, 1992 as a segmental control model example.
+Birkholz, I believe, uses "action based" control,
+so I'm hoping this will give me
+a sense of how that works
+(hopefully with lots of technical detail).
+* During reading - Research paper
+** What is the central question of the paper?
+This is a modelling paper; so, basically,
+how can we synthesize speech well?
+In particular, this paper focused on
+consonant-vowel coarticulation,
+meaning that vowels sound subtly different
+when in the context of following a certain consonant.
+** Hypothesis
+Birtholz uses a variety of methods
+which should be available in VocalTractLab.
+He validated that the methods worked
+by synthesizing several sounds,
+and testing listening comprehension
+on 20 German subjects.
+** Summary of methods (theoretical or experimental)
+First, vocal tract articulator positions are
+determined from a single German speaker
+who voiced many syllables in an MRI.
+So, those recordings were used to figure out
+the articulator positions.
+Then, since the vocal tract model is not perfect,
+a (pretty simple) optimization was done to
+optimize the articulator positions for
+all of the sounds.
+
+The vocal tract model is worth noting
+because it's significantly more sophisticated
+than previous publications I've looked at.
+Specifically, there are 23 degrees of freedom,
+and the modelling is done in 3-D,
+taking into account tongue side elevations, etc.
+** Assumptions
+No important ones that I could spot.
+** Summary of results
+The results are pretty impressive;
+people were able to recognize the syllables
+with high accuracy.
+** Authors' claims (what is significant?)
+One important claim is that
+the current text-to-speech
+is dominated by concatenative and
+statistical parametric speech synthesis techniques,
+but that articulatory synthesis is coming
+back into vogue because it's flexible
+and highly expressive.
+This is promising.
+He also, of course, claims that his method is good.
+** Are those claims supported?
+I don't know enough to say for sure,
+but I'm mostly convinced.
+** Are those claims important?
+Yes; it's good to know that articulatory
+synthesis is worthwhile,
+and this paper is a good place to start
+my work from.
+** Figures of note (to replicate / steal)
+All these figures are worth a second look.
+** List of unfamiliar terms / ideas to look up later
+Lots, so mostly ignored that.
+* After reading
+** Overall impression (good paper, brutal, etc)
+It's a pretty impressive model, for sure.
+But that means it's likely going to be
+hard to replicate; and, for the time being,
+VocalTractLab is pretty daunting.
+It might be worth writing some tutorials,
+or something, for it.
+I should also ask Peter about the possibility
+of an API I can compile on Linux,
+so I can write Python bindings for it, etc.
+** Closely related papers and how this compares to them
+This is the first high-quality synthesis paper I've read,
+and while it's missing a lot of important detail,
+it's a good start.
+I really wish his thesis were in English.
+** Todo [3/3]
+- [X] Brainstorm research ideas and put on a separate list
+- [X] Transfer list of unfamiliar terms elsewhere and define
+- [X] Review bibliography and download interesting

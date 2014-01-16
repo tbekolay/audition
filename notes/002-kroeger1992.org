@@ -60,7 +60,7 @@ It's curious that the results are pretty light too;
 is there no way to quantify the "goodness"
 of synthesized sound?
 ** Closely related papers and how this compares to them
-This is the first control paper I've read;
+This is the first control paper I've read, so not sure.
 ** Todo [3/3]
 - [X] Brainstorm research ideas and put on a separate list
 - [X] Transfer list of unfamiliar terms elsewhere and define
