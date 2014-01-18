@@ -2,11 +2,21 @@
 ** DONE Read Kröger, 2009
 ** DONE Read Kröger, 1992
 ** DONE Read Birkholz, 2013
+** DONE Read Zilany, 2006
 ** Outline of Comp-II
 *** Question 1: Can current vocal tract models actually give good speech?
 *** Answer 1: Use modern optimal motor control to generate a target sound.
 *** Question 2: Can this be done in a biologically plausible manner?
 *** Answer 2: Do learning in NEF.
+*** Question 3: Can speech recognition be done better on cochlear signals?
+*** Answer 3: Do a subset of speech recognition with cochlear signals.
+*** Question 4: Can that subset be done in a biologically plausible manner?
+*** Answer 4: Do subset in NEF.
+*** Question 5: Can we hook up the synthesis to the recognition?
+*** Answer 5: Produce sounds, optimize the recognition.
+*** Question 6: In neurons?
+*** Answer 6: Do in neurons.
 * Post Comp-II
+** Make an IPython notebook to play around with eqs in Zilany, 2006
 ** Read Guenther, 1995
 ** Read Howard & Messum, 2011

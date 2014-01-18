@@ -1,0 +1,91 @@
+* Before reading
+** Title
+Modeling auditory-nerve responses for high sound pressure
+levels in the normal and impaired auditory periphery
+** Authors (are any notable?)
+Muhammad S. A. Zilany (From Ian Bruce's lab, seems to be the programmer)
+Ian C. Bruce (Auditory researcher at McMaster, visited Waterloo)
+** Year
+2006
+** Journal
+Journal of the Acoustical Society of America
+** Tags
+sensory processing, auditory periphery
+** Why are you reading this paper?
+I feel like I have a decent handle on the synthesis
+part of things, so now I'm on to the sensory side.
+This is the first paper Zilany and Bruce published
+on their model, which seems to have evolved a lot
+in the past 8 years. However, it is likely that
+it starts off somewhat simple and gets
+more complex, so I figured I would start
+with this (super long---67 pages!) paper,
+making the subsequent papers easier to read.
+* During reading - General notes
+- Refer back to the introduction for good citations for
+  what people have used auditory peripheral models for.
+- Turns out Bruce, 2003 is the real start of this line
+  of research. Dang!
+- Skipped a fair bit of Results and Discussion.
+- The Journal of the Acoustical Society of America
+  is pretty big for auditory modelling!
+* During reading - Research paper
+** What is the central question of the paper?
+They present a model that replicates several
+important effects such as the C1/C2 interaction,
+peak-splitting, and best frequency-shift.
+** Hypothesis
+Their model extends Bruce et al., 2003
+with some additional C2 modelling in parallel with C1.
+** Summary of methods (theoretical or experimental)
+There's quite a bit to summarize;
+Figure 1 does a good summary,
+and I will want to make a notebook
+to investigate the math more.
+** Assumptions
+This paper does not try to be
+a physiologically accurate model;
+at least the C2 component is phenomenological.
+** Summary of results
+I skipped much of the results,
+as I was most concerned about how the model works.
+They do seem to do a good job
+on their three goals, replicating
+C1/C2 interaction, peak-splitting,
+and best frequency-shift.
+** Authors' claims (what is significant?)
+Good model.
+** Are those claims supported?
+Seems so! There are lots of extensions since 2006 though.
+** Are those claims important?
+Yes, I want to use their model.
+** Figures of note (to replicate / steal)
+- Fig 1 is a great, easy to understand summary of the model
+** List of unfamiliar terms / ideas to look up later
+- Basilar membrane (excitation)
+- Inner hair cell
+- Transduced
+- Chirp filter
+- Kiang's two-factor cancelation hypothesis
+- Gammatone filter (3rd order?)
+- Boltzmann function
+* After reading
+** Overall impression (good paper, brutal, etc)
+It's a long and detailed paper,
+so there are aspects which I don't fully appreciate yet.
+But, the description of the model was very clear to me,
+and they give the equations and parameter values,
+so I'm confident with some exploration
+and extra reading, I'll be able to understand this stuff.
+** Closely related papers and how this compares to them
+I thought this was the first, but it's really the second
+in the line of Ian Bruce's cochlear modelling.
+Bruce, 2003 seems to be the first presentation.
+Then there's this paper, and then at least 4 that I have
+after this one.
+This is the first I've read,
+so I can't compare them at the moment.
+** Todo [1/3]
+- [X] Brainstorm research ideas and put on a separate list
+- [ ] Transfer list of unfamiliar terms elsewhere and define
+- [ ] Review bibliography and download interesting
