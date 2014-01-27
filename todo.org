@@ -4,6 +4,7 @@
 ** DONE Read Birkholz, 2013
 ** DONE Read Zilany, 2006
 ** DONE Outline of Comp-II
+** DONE Read Zilany, 2014
 * Comp-II
 ** Speech recognition section
 ** Speech synthesis section

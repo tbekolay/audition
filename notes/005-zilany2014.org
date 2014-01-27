@@ -1,0 +1,65 @@
+* Before reading
+** Title
+Updated parameters and expanded simulation options
+for a model of the auditory periphery
+** Authors (are any notable?)
+Muhammad S. A. Zilany (From Ian Bruce's lab, seems to be the programmer)
+Ian C. Bruce (Auditory researcher at McMaster, visited Waterloo)
+Laurel H. Carney (Bruce's supervisor, I believe.)
+** Year
+2014
+** Journal
+Journal of the Acoustical Society of America
+** Tags
+sensory processing, auditory periphery
+** Why are you reading this paper?
+I was about to start writing the Comp-II
+but realized that I should probably
+read the most up-to-date paper
+on the Bruce cochlea model.
+While the earlier paper was mostly understandable,
+I must assume that progress has been made,
+so this should provide a good
+"state-of-the-art" overview
+* During reading - General notes
+- I should read, at least, the 2009 paper as well
+  (... Long-term adaptation with power-law dynamics)
+- Liberman, 1978, has some data to model?
+* During reading - Research paper
+** What is the central question of the paper?
+- There is no real question here; this is a quick update
+  to their 2009 model that matches some data better.
+** Hypothesis
+N/A
+** Summary of methods (theoretical or experimental)
+- Their 2009 paper has the bulk of this.
+  They used some interesting equations to model mean
+  and variance of firing rates given some absolute / relative
+  refractory times
+** Assumptions
+N/A
+** Summary of results
+- With the new parameters, the model matches better
+** Authors' claims (what is significant?)
+- Matches the 1978 Liberman data better.
+** Are those claims supported?
+- Yes
+** Are those claims important?
+- Not to me, but perhaps to JASA
+** Figures of note (to replicate / steal)
+- None
+** List of unfamiliar terms / ideas to look up later
+- None
+* After reading
+** Overall impression (good paper, brutal, etc)
+- I'm glad this was only a 4-pager, as there wasn't much content here
+- At least, it made me confident that I can plow ahead with
+  Comp-II tomorrow. I'll be reading up on some auditory nervous system
+  basics this afternoon, which will be useful and put me in the
+  right mindset
+** Closely related papers and how this compares to them
+- N/A
+** Todo [3/3]
+- [X] Brainstorm research ideas and put on a separate list
+- [X] Transfer list of unfamiliar terms elsewhere and define
+- [X] Review bibliography and download interesting
