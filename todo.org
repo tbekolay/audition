@@ -6,7 +6,8 @@
 ** DONE Outline of Comp-II
 ** DONE Read Zilany, 2014
 * Comp-II
-** Speech recognition section
+** DONE Speech recognition section
+** Auditory periphery subsection
 ** Speech synthesis section
 ** Closed loop modelling section
 ** Spiking neural networks section

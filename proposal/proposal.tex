@@ -33,10 +33,11 @@
 \renewcommand\footrulewidth{0pt}
 
 % Make title
-\title{Comp-II: Insert title here}
+\title{Comp-II: Biologically plausible methods in speech recognition
+  and synthesis}
 \date{\today}
 \author{\textbf{Trevor Bekolay}}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{document}
 
 \maketitle
@@ -48,6 +49,150 @@
 \section{Introduction}
 
 \section{Speech recognition}
+
+Automatic speech recognition
+is a large and growing field
+that has acted as a test bed
+for new AI techniques for decades,
+due to the allure of enabling
+interactions with computers
+using the same means
+as humans interact with other humans.
+Speech recognition can be formalized
+with the following equation.
+\begin{equation}
+  \max_W p(W|O) = \max_W p(O|W) p(W),
+\end{equation}
+where $W$ is a sequence of words,
+and $O$ is an audio waveform.
+In this formalism, the speech recognition problem
+is to find the most likely sequence of words
+given some audio waveform.
+Applying Bayes' rule, we can find
+this sequence of words
+if we know the probability
+of some sequence of words occurring
+in the target language,
+and the distribution of audio waveforms
+given some sequence of words.
+In the literature, these two terms
+are sometimes given explicit names.
+The probabilities of a word sequence
+occurring in a target language,
+$p(W)$, is called the \textit{language model}
+and the distribution of waveforms
+given a word sequence, $p(O|W)$,
+is called the \textit{acoustic model}.
+
+In practice, these probability distributions
+are too large to compute,
+and instead the problem of speech recognition
+is broken down into several subproblems
+that are solved in sequence,
+resulting in a speech recognition ``pipeline.''
+While some techniques may span several levels
+of the pipeline, at its finest granularity,
+there are six levels to the pipeline,
+as shown in Figure 1.
+
+TODO: Insert figure 1 (like VanHoucke slide 22)
+
+The pipeline begins with the \textit{audio waveform}.
+This one-dimensional signal transformed
+into a sequence of \textit{audio frames}
+in a process typically called feature extraction.
+In the case of audio signals,
+speech recognition researchers have followed
+biology by using the frequency spectrum
+of the time-varying audio waveform
+as the primary feature to be extracted.
+The frequency components of the waveform
+over a small time-window are often compressed,
+resulting in each audio frame consisting of
+a tractable number of coefficients
+that describe the frequency components
+of a slice of the audio waveform
+(typically around 10 milliseconds of audio).
+This transformation is typically done
+with Fourier analysis (XXXcite),
+which is sometimes distributed
+to the Mel scale (XXXcite).
+However, more sophisticated methods
+such as Perceptual Linear Prediction (XXXcite),
+Linear Predictive Coding (XXXcite),
+and Cepstral analysis (XXXcite) have been
+used to construct audio frames from a waveform.
+
+Each audio frame is then transformed
+into a \textit{state}
+in a Hidden Markov Model (HMM).
+This transformation is also called
+\textit{acoustic modeling},
+as we are building a statistical model
+of the HMM states given the audio frame.
+The first generation of successful
+speech recognition systems
+used Gaussian Mixture Models
+to do efficient acoustic modeling.
+However, modern speech recognition systems,
+such as those used by Google,
+use neural networks
+(specifically, neural networks trained with deep learning)
+for acoustic modeling.
+
+Each state corresponds to a small window of time.
+Sequences of states are transformed
+into \textit{phonemes},
+which are the smallest atoms of speech
+studied in linguistics,
+as they can be discriminated consciously by humans.
+Mapping from states to phonemes
+is typically done through a composition operation
+by a finite state transducer (FST).
+FSTs are heavily used in the higher levels
+of speech recognition,
+as they offer a mathematical formalism
+that can be manipulated with efficient algorithms.
+
+Phonemes are composed to form \textit{words}.
+The phonemes that make up each word
+can simply be looked up
+in the target language's \textit{lexicon}.
+In practice, the lexicon is often encoded
+in a finite state transducer.
+
+Words are composed to form \textit{sentences}.
+While this starts to encroach
+on higher-level features of language,
+such as grammar and syntax,
+most speech recognition systems
+use simple statistical techniques
+to determine if a sequence of words
+forms a sentence.
+Again, finite state transducers
+are a common technique here,
+though more sophisticated language models exist.
+
+Little is known about the neurobiology
+of speech recognition;
+while several auditory pathways have been identified
+in the human brain (XXXcite),
+it is unknown if those pathways map onto
+the speech recognition pipeline
+used in artificial intelligence.
+However, the first stage of the pipeline,
+the mapping from audio waveforms
+to audio frames, was originally inspired
+by the auditory periphery system
+in the brain.
+Recent developments in auditory periphery modeling
+have yet to be compared to the methods used
+in artificial speech recognition,
+and it may be possible that
+these auditory periphery models
+provide a better starting point
+for the remaining steps in the pipeline
+than existing techniques.
 
 \subsection{Auditory periphery modelling}
 
