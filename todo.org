@@ -7,7 +7,7 @@
 ** DONE Read Zilany, 2014
 * Comp-II
 ** DONE Speech recognition section
-** Auditory periphery subsection
+** DONE Auditory periphery subsection
 ** Speech synthesis section
 ** Closed loop modelling section
 ** Spiking neural networks section

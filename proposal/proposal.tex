@@ -95,7 +95,7 @@ of the pipeline, at its finest granularity,
 there are six levels to the pipeline,
 as shown in Figure 1.
 
-TODO: Insert figure 1 (like VanHoucke slide 22)
+XXX: Insert figure 1 (like VanHoucke slide 22)
 
 The pipeline begins with the \textit{audio waveform}.
 This one-dimensional signal transformed
@@ -196,7 +196,177 @@ than existing techniques.
 
 \subsection{Auditory periphery modelling}
 
+While the functions of areas in the brain
+associated with auditory processing
+are largely unknown,
+the auditory periphery is well understood.
+Briefly, the auditory periphery
+is responsible for sensing pressure waves
+in the air and transducing them into
+neural signals that we perceive as sound.
+As seen in Figure~XXX,
+air pressure waves are funneled into the auditory canal,
+causing the tympanic membrane (eardrum)
+to vibrate, which causes the stapes
+to move in and out of the oval window of the cochlea.
+Inside the cochlea, the movement of the stapes
+disturbs fluid around the basilar membrane,
+causing it to deform at specific points
+depending on the frequency of the movement
+of the stapes; higher frequency movements
+cause deformation at the base of the basilar membrane,
+and low frequency movements cause deformation
+at the apex of the basilar membrane.
+Hair cells lie on top of the basilar membrane
+and touch the tectorial membrane.
+As the basilar membrane is deformed,
+the hair cells lie against
+the tectorial membrane at different angles,
+which cause different amounts of ions
+to flow into the hair cell.
+This directly controls the membrane potential
+of the hair cells,
+which is communicated
+to the brain through cochlear nerve fibers.
+Note that the hair cells exhibit graded potentials;
+that is, they do not fire action potentials.
+The hair cells synapse with spiral ganglion neurons,
+whose axons form the auditory nerve
+(also known as the cochlear nerve).
+
+XXX: Insert Figure 2; auditory periphery basics
+
+While the basic function of the auditory periphery
+is to separate the incoming vibrations
+into its frequency components,
+as speech recognition systems do,
+the actual transformation is significantly
+more complicated than that.
+Frequency components are nonlinearly weighted.
+The incoming signal is amplified
+if its amplitude is low,
+but at a certain volume transitions
+to a non-amplified state,
+resulting in complicated dynamics
+at the transition point.
+These and several other nonlinearities
+make auditory periphery modeling
+significantly more complicated
+than just Fourier analysis.
+
+A computational model proposed originally by
+Bruce, Sachs \& Young
+and later extended by Zilany, Bruce, Nelson, \& Carney
+has been able to replicate
+many of the peculiarities
+of the biological auditory periphery (XXXcites),
+and has been used in cochlear implants
+due to its ability to produce
+similar signals as biological hair cells.
+We will refer to this as the
+Zilany model in the remainder of this proposal.
+
+The Zilany model consists of a series
+of interacting nonlinear filters
+which produce a membrane potential
+similar to that produced
+by inner hair cells along the basilar membrane
+(see Figure~XXX).
+This is fed into a synapse model and spike generator
+that emulates the action of cochlear cells,
+and produces the action potentials
+that travel along the auditory nerve.
+
+XXX: Figure 2 from Zilany 2009
+
+The instantaneous pressure waveform
+(i.e., the audio input)
+goes through a middle-ear filter,
+whose output goes through three sets of filters
+that are evaluated in parallel:
+the C1, C2 and control path filters.
+The middle-ear filter is a fifth order digital filter.
+The control path is responsible for
+setting the $\tau_{C1}$ time constant,
+which affects the gain and bandwidth
+of the C1 filter.
+$\tau_{C1}$ is determined by
+a series of nonlinear
+(gammatone, Boltzmann)
+and low-pass filters.
+The C1 and C2 filters are
+complex functions with three poles
+(i.e., frequencies for which the
+value of the function goes to infinity)
+and one zero (i.e., a frequency
+for which the value of the function goes to zero).
+The locations of the poles and zero
+are determined by
+several parameters, including
+the tuning properties of
+the hair cell being simulated,
+and its characteristic frequency,
+which partially determines the cell's
+tuning properties.
+The C1 filter is responsible for most
+low to medium frequency responses,
+modeling both inner and outer hair cell
+activity, resulting in a chirp filter.
+The C2 is responsible for high frequency responses,
+modeling inner hair cell activity
+with a wideband filter;
+the C2 filter is identical
+to the broadest possible C1 filter,
+which occurs when the outer hair cells
+are completely impaired.
+Finally, the C1 and C2 filters
+are transduced to a voltage response,
+summed together, and low-pass filtered
+to obtain the final output voltage
+of the inner hair cells.
+
+The resulting voltage from the inner hair cell
+is then communicated to a spiral ganglion cell
+through the IHC-AN synapse.
+This synapse exhibits adaptation dynamics
+on at least three time scales:
+rapid adaptation on the scale of milliseconds,
+short-term adaptation on the scale of tens of milliseconds,
+and slow adaptation on the scale of seconds
+(XXXcite).
+Zilany et al. model each time scale explicitly.
+On the shortest time scale,
+adaptation is exponential.
+Exponential adaptation occurs naturally
+through simulating the diffusion
+of three stores of neurotransmitter
+across the synaptic cleft.
+On the medium and long timescales,
+power-law adaptation is directly computed
+by convolving a power-law kernel with
+the history of prior responses;
+the parameters of the kernel
+are larger on the medium timescale
+compared to the long timescale.
+The results of the three timescales
+are combined to give the output
+in terms of the spontaneous rate
+(spikes per second) of the cell being simulated.
+
+The spontaneous rate,
+as determined by the synapse model,
+is mapped to spike times
+through a nonhomogeneous Poisson process
+modified to include refractory effects.
+XXXciteZhang2001
+
 \subsection{Open research questions}
+
+While the Zilany model
+has closely replicated experimental data,
+and has proven useful in cochlear implants,
+it has not yet been used in the context
+of automatic speech recognition.
 
 Can using auditory periphery signals
 instead of waveforms
