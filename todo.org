@@ -8,9 +8,11 @@
 * Comp-II
 ** DONE Speech recognition section
 ** DONE Auditory periphery subsection
-** Speech synthesis section
+** DONE Speech synthesis section
+** Articulatory speech synthesis section
 ** Closed loop modelling section
 ** Spiking neural networks section
+** Proposal section
 ** Introduction and abstract
 * Post Comp-II
 ** Make an IPython notebook to play around with eqs in Zilany, 2006

@@ -10,14 +10,7 @@
 \usepackage{graphicx,float,wrapfig}
 \usepackage{inconsolata}
 \usepackage{natbib}
-
-% In case you need to adjust margins:
-\topmargin=-0.45in
-\evensidemargin=0in
-\oddsidemargin=0in
-\textwidth=6.5in
-\textheight=9.0in
-\headsep=0.25in
+\usepackage[top=1in,bottom=1in,left=1.5in,right=1.5in]{geometry}
 
 %\setlength{\parindent}{0pt}
 \setlength{\parskip}{2ex}
@@ -33,10 +26,12 @@
 \renewcommand\footrulewidth{0pt}
 
 % Make title
-\title{Comp-II: Biologically plausible methods in speech recognition
-  and synthesis}
+\title{\bf Biologically plausible methods \\
+  in speech recognition and synthesis}
 \date{\today}
-\author{\textbf{Trevor Bekolay}}
+\author{{\bf Trevor Bekolay} \\
+  Centre for Theoretical Neuroscience, University of Waterloo \\
+  Waterloo, ON  N2L 3G1}
 
 \begin{document}
 
@@ -61,7 +56,7 @@ as humans interact with other humans.
 Speech recognition can be formalized
 with the following equation.
 \begin{equation}
-  \max_W p(W|O) = \max_W p(O|W) p(W),
+  \max_W P(W|O) = \max_W P(O|W) P(W),
 \end{equation}
 where $W$ is a sequence of words,
 and $O$ is an audio waveform.
@@ -360,23 +355,150 @@ through a nonhomogeneous Poisson process
 modified to include refractory effects.
 XXXciteZhang2001
 
-\subsection{Open research questions}
-
-While the Zilany model
-has closely replicated experimental data,
-and has proven useful in cochlear implants,
-it has not yet been used in the context
-of automatic speech recognition.
-
-Can using auditory periphery signals
-instead of waveforms
-result in better speech recognition?
-
-We'll try to do a small subset of speech recognition.
-
 \section{Speech synthesis}
 
+Speech synthesis is the converse
+of speech recognition;
+given a sequence of words,
+produce an audio waveform
+that resembles a human
+voicing that sequence of words.
+The pipeline for synthesis is very similar
+to the pipeline for recognition,
+only in reverse:
+sentences are broken down into words,
+which are broken down into
+their underlying phonemes;
+this is typically called the
+``frontend'' of a speech synthesis system.
+The phonemes are then either
+directly converted into audio waveforms,
+or further broken down into
+smaller states which are converted to audio waveforms;
+this is typically called the ``backend''
+of a speech synthesis system.
+
+While speech recognition
+has seen significant advances
+and commercial success recently,
+speech synthesis remains
+unsatisfactory to the general public
+despite recent advances.
+Modern speech synthesizers can
+produce natural-sounding speech,
+but that speech is inflexible
+and cannot be modified
+to reflect the speaker's
+emotional state or speaking style,
+making it sounds prerecorded.
+Synthesis techniques
+that are more flexible exist,
+but are often computationally intensive,
+and often sound ``robotic,''
+or too perfect,
+due to the way in which
+speech is produced.
+
+Currently, the dominant speech synthesis
+methods is concatenative (or unit selection) synthesis.
+In concatenative synthesis, waveforms are generated
+by selecting and concatenating audio samples
+from a large database of recorded sounds
+(``units,'' typically phonemes, but sometimes
+smaller samples on the order of tens of milliseconds).
+Since the units are recordings of real speech,
+the result sounds natural.
+Audio databases typically contain samples with
+varying prosodic characteristics
+(rhythm, stress, intonation)
+allowing for words to be synthesized
+using the underlying units
+with the desired prosodic characteristics.
+Machine learning techniques
+are employed to efficiently search
+the database of units and combine
+the units together
+(e.g., HMMs and Viterbi search,
+as are used in speech recognition).
+While the results are generally good
+(concatenative synthesis is used in
+the majority of commercially available
+text-to-speech systems XXX) % http://www.theverge.com/2013/9/17/4596374/machine-language-how-siri-found-its-voice
+this technique is limited to the corpus
+of sounds available in the database.
+Additionally, there can be discontinuities
+in the transition from one unit
+to the next, making even the recorded
+voice sample sound artificial.
+Attempts to modify the concatenated
+samples after the fact,
+to change its prosodic characteristics,
+for example, often require
+spectral transformations that also
+result in unnatural-sounding speech.
+
+Advances in computing power
+have made statistical parametric synthesis
+techniques viable.
+While concatenative synthesis
+cobbles together speech using existing speech,
+statistical parametric synthesis
+addresses speech synthesis
+as a generative statistical problem,
+much in the way that
+the speech recognition formalism does.
+Like concatenative synthesis,
+a large database of recorded speech is necessary,
+but instead of using
+raw samples from that database,
+the database is used to generate
+a set of model parameters.
+The problem of speech synthesis
+is represented as
+\begin{equation}
+  \hat{o} = \arg \max_o P(o|W, \hat{\lambda}),
+\end{equation}
+where $o$ is a set of speech parameters,
+$W$ is a sequence of words,
+and $\hat{\lambda}$ is a set of model parameters
+resulting from training on the speech database.
+The appropriate speech parameters
+for the given word sequence, $\hat{o}$,
+is fed through a series of filters
+to generate synthesized speech.
+
+The most common method of implementing
+statistical parametric synthesis
+is to use an elaborate set of HMMs,
+working at many different levels
+and in parallel to model
+all of the features necessary to produce
+intelligible speech.
+These features sets are significantly
+more complicated than those
+used in speech recognition;
+in recognition, phonetic, prosodic,
+and other contextual cues
+can be collapsed into single HMM states,
+whereas in synthesis,
+all of these states must be explicitly tracked.
+In one system (XXXZen2007),
+there over a hundred parameters to be modeled.
+Like similar techniques in speech recognition,
+deep neural networks have begun
+to replace HMMs, with promising results (XXXZen2013).
+Despite these advances, concatenative systems
+were still judged the most natural
+at the 2012 Blizzard Challenge
+(2013 results not available at this time).
+
 \subsection{Articulatory speech synthesis}
+
+While its commercial potential is unclear,
+relegating it primarily to academic research,
+the most flexible speech synthesis systems
+are also the most closely tied to biology.
+
 
 \subsection{Open research questions}
 
@@ -413,5 +535,56 @@ since computer speech sound mechanical due to no noise.
 \subsection{Neural Engineering Framework}
 
 \subsection{Learning}
+
+\section{Proposal}
+
+\subsection{Speech recognition}
+
+While the Zilany model
+has closely replicated experimental data,
+and has proven useful in cochlear implants,
+it has not yet been used in the context
+of automatic speech recognition.
+There are several ways in which
+the Zilany model could be used
+to validate or improve automatic speech recognition.
+
+First, the model could be compared
+to existing methods used to map
+audio waveforms to frames;
+given many audio waveforms,
+is the Zilany model able to
+produce a representation that
+is better suited for speech recognition
+than existing methods
+(e.g., a method may be better suited
+if the distance in feature space
+between different phonemes is larger).
+
+Second, the Zilany model could
+replace the feature extractor
+in an existing speech recognition pipeline.
+This may uncover some features
+of the model that make it well suited
+to speech recognition that
+are difficult to reason about
+given the model's output alone.
+
+Third, the Zilany model could
+act as the frontend to a
+speech recognition system
+fully realized in a spiking neural network.
+The output of the Zilany model
+is spike times;
+when integrating with existing
+speech recognition systems,
+the spikes would either be
+converted back to instantaneous rates,
+or the spike generator step
+would be omitted.
+However, there may be significant performance
+or efficiency gains to be had
+by communicating with spikes
+in a speech recognition system.
 
 \end{document}
