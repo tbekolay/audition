@@ -1,4 +1,4 @@
-* Pre Comp-II
+* DONE Pre Comp-II
 ** DONE Read Kröger, 2009
 ** DONE Read Kröger, 1992
 ** DONE Read Birkholz, 2013
@@ -6,14 +6,6 @@
 ** DONE Outline of Comp-II
 ** DONE Read Zilany, 2014
 * Comp-II
-** DONE Speech recognition section
-** DONE Auditory periphery subsection
-** DONE Speech synthesis section
-** Articulatory speech synthesis section
-** Closed loop modelling section
-** Spiking neural networks section
-** Proposal section
-** Introduction and abstract
 * Post Comp-II
 ** Make an IPython notebook to play around with eqs in Zilany, 2006
 ** Read Guenther, 1995

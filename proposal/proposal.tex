@@ -27,7 +27,8 @@
 
 % Make title
 \title{\bf Biologically plausible methods \\
-  in speech recognition and synthesis}
+  in speech recognition and synthesis: \\
+  closing the loop}
 \date{\today}
 \author{{\bf Trevor Bekolay} \\
   Centre for Theoretical Neuroscience, University of Waterloo \\
@@ -43,7 +44,9 @@
 
 \section{Introduction}
 
-\section{Speech recognition}
+\section{Background}
+
+\subsection{Speech recognition}
 
 Automatic speech recognition
 is a large and growing field
@@ -249,6 +252,8 @@ make auditory periphery modeling
 significantly more complicated
 than just Fourier analysis.
 
+\subsubsection{Zilany model}
+
 A computational model proposed originally by
 Bruce, Sachs \& Young
 and later extended by Zilany, Bruce, Nelson, \& Carney
@@ -355,7 +360,7 @@ through a nonhomogeneous Poisson process
 modified to include refractory effects.
 XXXciteZhang2001
 
-\section{Speech synthesis}
+\subsection{Speech synthesis}
 
 Speech synthesis is the converse
 of speech recognition;
@@ -494,49 +499,243 @@ at the 2012 Blizzard Challenge
 
 \subsection{Articulatory speech synthesis}
 
-While its commercial potential is unclear,
-relegating it primarily to academic research,
-the most flexible speech synthesis systems
-are also the most closely tied to biology.
+The most flexible approach to speech synthesis
+is articulatory speech synthesis.
+Articulatory synthesis systems generate
+audio waveforms by simulating
+airflow through the human vocal tract.
+While this method is
+the most closely tied to biology,
+and was used in the first fully automatic
+text-to-speech synthesizer,
+its computational complexity
+and unnatural sounding results
+have hindered its adoption
+among academics and industry.
+Additionally, accurate simulation
+requires intricate knowledge
+of how the human vocal tract
+produces sounds,
+which at present is incomplete.
+However, unlike other methods,
+articulatory speech synthesis
+is able to test theories
+resulting from the biological exploration
+of sound production.
 
+Generally, articulatory speech synthesizers
+consist of three (typically independent) modules.
+The first is a \textit{control model},
+which generates vocal tract movements
+by determining the desired positions
+of the articulators in the vocal tract
+(i.e., the degrees of freedom in the control problem).
+The second is a \textit{vocal tract model},
+which converts movements, or desired positions,
+into vocal tract geometries in continuous time.
+The third is an \textit{acoustic model},
+which converts the geometries of the vocal tract
+into acoustic signals (i.e., audio waveforms).
+Each module has several classes of implementations.
 
-\subsection{Open research questions}
+XXX: some articulatory synth figure
 
-Can current vocal tract models give human-quality speech?
+One class of control models used in
+articulatory speech synthesis
+are segmental control models,
+which work on a set of goals and constraints.
+Given a phonological description
+of the utterance to be synthesized,
+segmental control models
+produce a set of timestamps
+(when a phoneme is to be voiced)
+and a set of goals for some,
+but not necessarily all,
+of the articulators.
+For example, to voice an \textit{a},
+a segmental control model might say
+that the \textit{a} starts at 0 ms
+and ends at 100 ms,
+and that the glottal aperture
+must be at position 10
+for that entire time window,
+but that the tongue tip
+should aim to reach position 0
+at some point in that time window.
+By specifying hard and soft constraints
+on the vocal tract model,
+segmental control can produce
+realistic transitions between
+phonemes simply by allowing
+non-essential articulators to
+remain in their current positions.
 
-We'll try using modern motor control to generate target sounds.
-We can use mngu0 sounds and fMRI for generating initial trajectories
+Another class of control models are
+action based control models,
+also known as gestural control models,
+which define a set of discrete motor actions
+(i.e., motor primitives in motor control literature)
+that are combined to produce sounds according
+to a phonemic and prosodic description.
+This leads to several levels of description.
+At the highest level,
+the description to voice an \textit{a}
+might be
+``close the glottis
+and open the velopharyngeal valve.''
+This gets mapped down to a
+high level motor plan,
+which defines when the ``glottal closing''
+and ``velopharyngeal valve opening''
+actions occur and for how long.
+This then is mapped down
+to a lower level phonetic articulatory description
+(using inverse dynamics)
+that defines how each articulator
+moves over time.
 
-\section{Closed loop modelling}
+The control model is tightly coupled
+with the vocal tract model.
+The vocal tract model defines
+the articulators that can be controlled,
+and typically also provides some clue
+for what articulator values
+are appropriate for the
+sound being synthesized.
 
-\subsection{Open research questions}
+One class of vocal tract models
+are statistical models,
+which extract relevant characteristics
+from a large set of data,
+mostly magnetic resonance imaging (MRI)
+paired with audio recordings.
+A full three-dimensional representation
+of the patient's vocal tract
+can be reconstructed with sufficient data,
+and by using dimensionality reduction techniques
+(e.g., XXXbaden2001orwhatever),
+the articulatory control parameters
+can be of tractable dimensionality
+while still producing a full
+3D representation of a vocal tract.
 
-Can synthesized speech
-influence auditory sensory learning,
-and vice versa?
+Another class of vocal tract models
+are biomechanical models,
+which attempt to fully reconstruct
+the physiology of the vocal tract.
+This type of model begins
+like the statistical model,
+using MRI and other anatomical measurements
+to develop a 3D representation
+of the vocal tract.
+However, instead of statistically
+reducing the dimensionality
+to determine the degrees of freedom
+available to the control system,
+these models also model how
+muscle activations affect the shape
+of the vocal tract
+and use that as the articulator.
 
-We'll try to hook them up together
-and learn via babbling and outside teachers.
+A final class of vocal tract models
+are geometric models,
+which generalize the overall
+shapes observed in
+MRI and anatomical studies.
+A set of parameters
+are used to generate a 3D model
+of a vocal tract,
+which has a set of articulators.
+While these models are typically
+less detailed than those
+generated from precise
+measurements of one subject's vocal tract,
+it can be used to generate vocal tracts
+from different subjects
+(both male and female).
+The parameters of the model
+can be tuned to a specific speaker,
+though the resulting vocal tract
+will not be as detailed.
 
-\section{Spiking neural networks}
+Finally, the acoustic model takes
+a vocal tract representation
+and simulates the airflow from
+the lungs, through the vocal tract,
+to the air pressure coming out
+of the mouth (i.e., the audio waveform).
+These models typically relate
+the vocal tract to some other physical
+device that has been modeled previously.
+One set of models treat the vocal tract
+as an analog transmission line,
+which has been used to
+simulate arterial blood flow.
+Another set of models treat the vocal tract
+as an analog electrical circuit.
+A final set of models,
+called finite element wave propagation models,
+explicitly models the air pressure wave
+as it travels through each section
+of the vocal tract.
+Hybrid technique combine one
+of the above techniques
+with an analogous transformation
+in the frequency domain for added accuracy.
+Within these systems, the glottis
+and the type of noise generated
+by air turbulence can be changed
+to modify the final synthesized audio.
 
-\subsection{Open research questions}
+\subsubsection{Birkholz synthesizer}
 
-Can the previously discussed items
-be done in a biologically plausible manner?
-Are there any practical benefits to doing this?
+\subsection{Closed loop modelling}
 
-We'll use the NEF to model some aspects of this.
-Some things,
-like representing the articular parameters with neurons,
-are trivial but provide good practical benefits
-since computer speech sound mechanical due to no noise.
+Most modern motor control is based on
+learning the control parameters via feedback.
+Even the most sophisticated
+articulatory speech synthesis systems
+do not use feedback to improve control;
+instead, they use very detailed measurements
+of the control parameters
+(aritculator positions).
+This would be analogous to controlling
+a robotic arm by measuring
+the amount of muscle activation
+for all of the muscles affecting
+the end effector position.
+
+One of the difficulties for speech in particular
+is that the ``end effector'' being controlled
+is typically mapped down
+to a time-varying scalar.
+Determining which of the dozens of control parameters
+are responsible for a scalar error
+is a near impossible task;
+yet, humans are able to produce
+exceedingly complex auditory signals
+with their vocal tracts.
+Perhaps gathering feedback
+in the same way that the brain receives feedback
+is key to how we learn to produce
+complex sounds.
+
+\subsection{Spiking neural networks}
 
 \subsection{Neural Engineering Framework}
 
 \subsection{Learning}
 
 \section{Proposal}
+
+Do adaptive control of
+articulatory speech synthesis
+using feedback from
+an auditory periphery model.
+This may involve the influence
+of other elements
+of the speech recognition pipeline,
+hence their inclusion in this proposal.
 
 \subsection{Speech recognition}
 
@@ -586,5 +785,34 @@ However, there may be significant performance
 or efficiency gains to be had
 by communicating with spikes
 in a speech recognition system.
+
+\subsection{Speech synthesis}
+
+Can current vocal tract models give human-quality speech?
+
+We'll try using modern motor control to generate target sounds.
+We can use mngu0 sounds and fMRI for generating initial trajectories
+
+\subsection{Closed loop modeling}
+
+Can synthesized speech
+influence auditory sensory learning,
+and vice versa?
+
+We'll try to hook them up together
+and learn via babbling and outside teachers.
+
+\subsection{Spiking neural networks}
+
+Can the previously discussed items
+be done in a biologically plausible manner?
+Are there any practical benefits to doing this?
+
+We'll use the NEF to model some aspects of this.
+Some things,
+like representing the articular parameters with neurons,
+are trivial but provide good practical benefits
+since computer speech sound mechanical due to no noise.
+
 
 \end{document}

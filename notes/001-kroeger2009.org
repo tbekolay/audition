@@ -73,7 +73,7 @@ The state of the art is summarized.
    expensive, and usually used for things other than the acoustic model.
    Cites: El-Masri et al. 1996, Mazsuzaki and Motoki 2000.
 
-There appear to be two additional parts fo the acoustic model:
+There appear to be two additional parts of the acoustic model:
 the glottis model, which generates the acoustic signal source
 that goes through the vocal tract. There are self-oscillating
 (Ishizaka and Flanagan 1972, Cranen and Boves 1987, Story and Titze 1995,
