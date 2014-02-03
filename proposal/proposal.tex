@@ -10,6 +10,7 @@
 \usepackage{graphicx,float,wrapfig}
 \usepackage{inconsolata}
 \usepackage{natbib}
+\usepackage{booktabs}
 \usepackage[top=1in,bottom=1in,left=1.5in,right=1.5in]{geometry}
 
 %\setlength{\parindent}{0pt}
@@ -689,42 +690,188 @@ to modify the final synthesized audio.
 
 \subsubsection{Birkholz synthesizer}
 
+One of the most successful articulatory synthesizers
+is one by Birtkholz et al,
+(available at \url{http://www.vocaltractlab.de/};
+we will refer to it as the Birkholz synthesizer)%
+\footnote{An early version of the synthesizer
+came second in a singing challenge
+at Interspeech 2007; results available at
+\url{http://www.interspeech2007.org/Technical/synthesis_of_singing_challenge.php}.}.
+The Birkholz synthesizer uses
+an analog electrical circuit transmission line
+for generating acoustics,
+a geometric model for the vocal tract,
+and an action based control model.
+
+While the full details of the acoustic model
+and the vocal tract model are not
+essential for the work proposed here,
+it is useful to note
+the 23 degrees of freedom
+being controlled by Birkholz's
+action based control model.
+
+\begin{tabular}{llrrl}
+\toprule
+{\bf Name} & {\bf Description} & {\bf Min.} & {\bf Max} & {\bf Unit} \\
+\midrule
+$HX$ & Horizontal hyoid position & 0.0 & 1.0 & \\
+$HY$ & Vertical hyoid position & -6.0 & -3.4 & cm \\
+$JX$ & Horizontal jaw displacement & -0.5 & 0.0 & cm \\
+$JA$ & Jaw angle & -7.0 & 0.0 & deg \\
+$LP$ & Lip protrusion & -1.0 & 1.0 & \\
+$LD$ & Vertical lip distance & -2.0 & 4.0 & cm \\
+$VS$ & Velum shape & 0.0 & 1.0 & \\
+$VO$ & Velic opening & -0.1 & 1.0 & \\
+$TCX$ & Tongue body center X & -3.0 & 4.0 & cm \\
+$TCY$ & Tongue body center Y & -3.0 & 1.0 & cm \\
+$TTX$ & Tongue tip X & 1.5 & 5.5 & cm \\
+$TTY$ & Tongue tip Y & -3.0 & 2.5 & cm \\
+$TBX$ & Tongue blade X & -3.0 & 4.0 & cm \\
+$TBY$ & Tongue blade Y & -3.0 & 5.0 & cm \\
+$TRX$ & Tongue root X & -4.0 & 2.0 & cm \\
+$TRY$ & Tongue root Y & -6.0 & 0.0 & cm \\
+$TS1$ & Tongue side elevation 1 & -1.4 & 1.4 & cm \\
+$TS2$ & Tongue side elevation 2 & -1.4 & 1.4 & cm \\
+$TS3$ & Tongue side elevation 3 & -1.4 & 1.4 & cm \\
+$TS4$ & Tongue side elevation 4 & -1.4 & 1.4 & cm \\
+$MA1$ & Minimum area tongue back region & 0.0 & 0.3 & cm$^2$ \\
+$MA2$ & Minimum area tongue tip region & 0.0 & 0.3 & cm$^2$ \\
+$MA3$ & Minimum area lip region & 0.0 & 0.3 & cm$^2$ \\
+\bottomrule
+\end{tabular}
+
+XXX: also include Fig 7 from Birkholz 2013
+
+The actions generated from
+the phonetic and prosodic representation
+are mapped to actions in this 23-dimensional space
+through analysis of MRI and dynamic MRI recordings
+of a single speaker.
+From that starting point,
+each vowel phoneme was optimized
+by minimizing the difference
+between the simulated formants
+and the speakers' formants\footnote{A
+speech formant is a frequency which should
+have maximum frequency for a specific
+sound. Three such formants have been identified
+for phonemes, though usually only the first
+two are necessary to uniquely identify
+a phoneme; for example, the long \textit{e}
+vowel sound (as in fr\textit{ee})
+can be uniquely identified with
+formants $f_1=240$ Hz and $f_2=2400$ Hz.}
+The optimizing procedure
+was a greedy hill-climbing algorithm
+in which each degree of freedom in
+the control signal for a given vowel
+was varied positively and negatively
+and the formant difference was evaluated
+until a local minimum was found.
+
+Despite this optimization procedure
+being relatively simple,
+subjective error rates dropped dramatically,
+pointing to the possibility
+of greatly improved synthesis
+by using more sophisticated optimization techniques.
+
+\subsection{Motor control}
+
+Articulatory speech synthesis
+can be thought of as a
+general motor control problem;
+in the case of the Birkholz synthesizer,
+the plant is the vocal tract model,
+which has 23 degrees of freedom.
+However, as an additional difficulty
+above and beyond general motor control,
+the measurable outcome of the plant
+is a complex function of that
+23-dimensional vector,
+resulting in a scalar result
+that is difficult to map
+back to the plant movements.
+However, thanks to MRI and other
+imaging techniques,
+Birkholz and other articulatory
+synthesis researchers have
+been able to discern
+plant positions over time
+for many utterances\footnote{This
+data is available for free in many cases;
+e.g., XXXmngu0 data}.
+
+Recent advances in motor control
+may be applied to the problem
+of articulatory speech synthesis.
+One such advancement is recent work
+in the area of operational space control,
+in which control is done in task space;
+in the speech synthesis case,
+this would mean that the phoneme being voiced
+is the target of control,
+not all the degrees of freedom of the plant
+XXXcitenakanishis.
+However, operation space control
+is primarily done in the context
+of rigid body dynamics systems;
+adapting these algorithms
+to the dynamics of the vocal tract
+is nontrivial.
+Recent approaches that learn
+operational space control
+may overcome those difficulties
+XXXcitepeters.
+
+Another promising direction
+for using modern motor control
+in articulatory speech synthesis
+is to use existing techniques and data
+to define movement primitives,
+and use Dynamic Movement Primitives
+XXXciteschaal to flexibly combine them.
+Especially promising about DMPs
+is that they are also defined
+for rhythmic motions,
+like those found in the glottis
+and other parts of the vocal tract.
+
 \subsection{Closed loop modelling}
 
-Most modern motor control is based on
-learning the control parameters via feedback.
+One of the biggest challenges
+for using modern motor control algorithms
+in the speech domain
+is the need for feedback.
 Even the most sophisticated
 articulatory speech synthesis systems
 do not use feedback to improve control;
 instead, they use very detailed measurements
 of the control parameters
 (aritculator positions).
-This would be analogous to controlling
-a robotic arm by measuring
-the amount of muscle activation
-for all of the muscles affecting
-the end effector position.
 
-One of the difficulties for speech in particular
-is that the ``end effector'' being controlled
-is typically mapped down
-to a time-varying scalar.
-Determining which of the dozens of control parameters
-are responsible for a scalar error
-is a near impossible task;
-yet, humans are able to produce
-exceedingly complex auditory signals
-with their vocal tracts.
-Perhaps gathering feedback
-in the same way that the brain receives feedback
-is key to how we learn to produce
-complex sounds.
+- closed loop modelling can give a good error signal
+by using the auditory periphery for the error signal.
+other people have done closed loop modelling
+already, but only in the context of babbling,
+and typically with a scalar ``good or bad''
+reinforcement signal.
+this doesn't seem to have been applied
+to adult speech.
 
-\subsection{Spiking neural networks}
 
 \subsection{Neural Engineering Framework}
 
-\subsection{Learning}
+to calculate things in spiking neurons
+(as is the output of the auditory periphery)
+we can use the nef
+
+\subsubsection{Learning}
+
+if we want to do the learning in the NEF too,
+then we can do it with PES rule.
 
 \section{Proposal}
 
