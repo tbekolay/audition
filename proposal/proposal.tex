@@ -839,6 +839,15 @@ for rhythmic motions,
 like those found in the glottis
 and other parts of the vocal tract.
 
+There have been some efforts
+to combine OSC, DMPs, and other motor control concepts
+into a cohesive framework
+for controlling arbitrary plants.
+One such effort is being undertaken
+by the CNRG;
+I plan to leverage that work and adapt
+it for the auditory domain.
+
 \subsection{Closed loop modelling}
 
 One of the biggest challenges
@@ -849,20 +858,189 @@ Even the most sophisticated
 articulatory speech synthesis systems
 do not use feedback to improve control;
 instead, they use very detailed measurements
-of the control parameters
-(aritculator positions).
+of the control parameters.
+In order to control those parameters flexibly
+(and in the same way that the brain controls them)
+a control system should use feedback
+to fine-tune or completely learn
+the dynamics of the vocal tract.
 
-- closed loop modelling can give a good error signal
-by using the auditory periphery for the error signal.
-other people have done closed loop modelling
-already, but only in the context of babbling,
-and typically with a scalar ``good or bad''
-reinforcement signal.
-this doesn't seem to have been applied
-to adult speech.
+Several lines of research have converged recently
+to make such a closed loop model possible;
+speech recognition can be done
+with a biologically plausible frontend,
+informing an articulatory speech synthesizer
+that optimizes itself based on feedback.
 
+A concrete hypothesis on how
+this might be done was proposed by Kroger et al.
+XXXcite.
+While their model uses less sophisticated
+methods than would be necessary
+to do state of the art speech
+recognition and synthesis,
+the overall structure of the model
+(shown in Figure~XXX)
+can serve as a good starting point
+for a closed-loop speech model.
+In particular, Kroger et al. have
+noted several important pathways
+that are likely to be essential
+to a closed-loop model.
+For example, they separate feedback
+into auditory feedback,
+which can train cortical areas
+dedicated to high-level linguistic knowledge,
+and somatosensory feedback,
+which can train cortical areas
+dedicated to low-level motor control.
+Despite only using self-organizing maps,
+Kroger et al. was able to train their model
+to produce and perceive several phonemes
+using a training method analogous
+to human babbling.
 
-\subsection{Neural Engineering Framework}
+XXX include Kroger figures
+
+While Kroger et al.
+do not term this structure
+as hierarchical,
+it can easily be phrased hierarchically
+(e.g., the high-dimensional acoustic
+signal is reduced to a lower-dimensional
+auditory map).
+Similar hierarchies have been explored
+in other projects by members of the
+Computational Neuroscience Research Group
+(e.g., Spaun XXXcite, NOCH XXXcite, Dan's HRL XXXcite).
+
+Other models have been proposed
+that use auditory feedback
+to learn how to control
+an articulatory speech synthesizer.
+Warlaumont developed a spiking neural model
+that used a reinforcement-modulated
+spike timing dependent plasticity rule
+to reward the neural patterns
+responsible for producing
+recognizable utterances
+in a babbling context
+(XXXcite).
+Howard \& Messum developed
+a model called Elija
+that goes even further,
+starting from babbling
+and progressing to learning
+the names of objects,
+though these objects all had
+single syllable names.
+Their focus was on interaction
+between a human caregiver
+and the model through a microphone.
+
+All three of these
+(Kroger et al., Warlaumont, and \textit{Elija})
+use early childhood acquisition of speech
+to test their models,
+rather than on using feedback
+to refine adult speech synthesis.
+The only study that I am aware of
+that attempts to do closed-loop learning
+on a sophisticated articulatory synthesizer
+is Prom-on et al. which attempted
+to minimize the error in frequency space
+between a synthesized and target sound
+using a greedy stochastic gradient method.
+While they were able to produce
+sounds with similar frequency spectrograms
+as the target sounds starting from
+random initial vocal tract positions
+in the Birkholz synthesizer,
+the results have not been quantified
+and compared to the manual
+synthesis techniques.
+However, the study does provide
+evidence that the Birkholz synthesizer's
+control parameters can be learned.
+
+\subsection{Spiking neural networks}
+
+While the biologically inspired techniques
+previously discussed have
+promising characteristics,
+implementing them on traditional computers
+results in discrete and
+computationally intensive algorithms.
+Implementing them in the same way
+that biological systems implement
+them---i.e., with spiking neurons---may
+provide benefits in terms of
+computational complexity
+(if implemented on massively parallel hardware)
+and realism, due to the non-discrete
+and noisy nature of biological computation.
+
+Modelling the human auditory system
+in spiking neural networks
+rarely goes past the periphery,
+which has been presented above.
+However, studies of
+song recognition and production
+in birds has resulted in
+detailed models well grounded
+in biology, which may be analogous
+to human speech recognition and production.
+One key finding in this literature
+is that a pathway in the avian brain
+that is analogous to
+the cortex-basal ganglia-thalamus loop
+is active during song learning,
+but not production,
+just as we might expect
+for a general well-trained motor action
+in the human brain
+XXXcitefiete.
+Spiking neural models have been proposed
+in the context of this pathway
+that produce sequences of firing patterns,
+as observed in the avian brain (see Figure~below).
+
+XXX: figure1+2 in fiete
+
+These firing sequences become
+a learned \textit{template} of the song.
+The bird then attempts to mimic the song
+by producing songs until it matches
+the template song;
+this process occurs without
+external feedback,
+suggesting that it is trying
+to match the learned template specifically.
+Models of this template-matching
+typically do some type of neurally
+implemented reinforcement learning.
+
+Both of these processes---sequence generation
+through a cortex-basal ganglia-thalamus loop,
+and reinforcement learning in the same context---have
+been explored by members of the CNRG,
+specifically in this case by
+the proposer of this research.
+
+While these spiking models
+replicate avian experimental results well,
+we are only aware of one study that
+has extrapolated these models
+to the domain of human speech:
+Yildiz et al. used a birdsong
+circuit to do speech recognition
+with an error rate comparable
+to the HMM-based methods described previously.
+However, the vocabulary of words was very small
+(10 words, uttered by several different speakers),
+and the model did not use spiking neurons.
+
+\subsubsection{Neural Engineering Framework}
 
 to calculate things in spiking neurons
 (as is the output of the auditory periphery)

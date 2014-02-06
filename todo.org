@@ -10,3 +10,4 @@
 ** Make an IPython notebook to play around with eqs in Zilany, 2006
 ** Read Guenther, 1995
 ** Read Howard & Messum, 2011
+** Replicate results in Fiete & Seung, 2007
