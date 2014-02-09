@@ -1042,16 +1042,105 @@ and the model did not use spiking neurons.
 
 \subsubsection{Neural Engineering Framework}
 
-to calculate things in spiking neurons
-(as is the output of the auditory periphery)
-we can use the nef
+The models proposed in
+artificial intelligence and control theory typically
+have little in common with the spiking neural models
+proposed by computational neuroscientists.
+While AI models
+can perform tasks that are impressive to humans,
+they do so in a way
+that is not biologically plausible,
+often in a way that is specific
+to the task being solved,
+and often utilizes discrete approximations
+that appear ``robotic,'' especially
+in the context of speech.
+Spiking neural models,
+on the other hand,
+do not perform tasks humans cannot do,
+but are biologically plausible,
+can generalize well, and operate in
+continuous, noisy domains.
+
+The Neural Engineering Framework (NEF; XXXcite)
+provides a set of tools to implement
+AI and control theory models
+in spiking neural networks.
+The NEF defines three principles
+through which to represent
+information in spiking neural networks,
+transform that information through the connections
+between populations of spiking neurons,
+and implement dynamics through
+recurrent connectivity.
+
+Using the NEF allows for more flexibility
+than traditional spiking neural networks,
+as the principles do not depend
+on a particular neuron model,
+and so rate-neuron models or even direct
+dynamical system computations
+can be simulated to validate models
+before running a computationally intensive
+spiking neuron simulation.
+
+In short, the NEF provides
+the benefits of both AI/control theory models
+and computational neuroscience models.
+The primary downsides to using the NEF
+are additional complexity
+in constructing the model
+(the models are constrained in ways
+that AI models are not),
+and additional computational complexity.
 
 \subsubsection{Learning}
 
-if we want to do the learning in the NEF too,
-then we can do it with PES rule.
+Learning is not a core principle of the NEF;
+yet, learning is a key component
+of speech recognition and synthesis systems.
+It is clear that the specifics
+of a language are not (and cannot)
+be hard-wired,
+and many of the models
+discussed above in this proposal
+involve learning through
+optimization or synaptic weight changes.
+
+While not a core principle,
+learning has been applied to models constructed
+with the NEF several times successfully.
+To do transformations, the NEF
+optimizes the weights between two populations
+by solving a least-squares minimization problem.
+MacNeil \& Eliasmith XXXcite proposed
+a learning rule that minimized the same
+error online, as long as an appropriate
+error signal is available.
+Previously, I have combined that rule
+with an unsupervised learning rule
+and showed that the error minimization
+can be done more effectively with
+the unsupervised component
+XXXcite.
+Recently, Crawford has experimented
+with other unsupervised rules
+and implemented them
+in a more scalable and efficient manner
+XXXcitecogsci.
 
 \section{Proposal}
+
+All of the above background
+provides an optimistic long-term
+goal for a biologically plausible
+model of the speech system,
+from the activity of sensory
+hair cells in the ear
+to the activation of
+the muscles in the vocal tract.
+
+XXXkeepgoingfromhere
 
 Do adaptive control of
 articulatory speech synthesis
