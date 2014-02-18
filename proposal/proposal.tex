@@ -1139,94 +1139,128 @@ from the activity of sensory
 hair cells in the ear
 to the activation of
 the muscles in the vocal tract.
+Such a system would involve
+a recognition hierarchy,
+taking in high-dimensional auditory features
+and mapping them to lower-dimensional
+features like word sequences
+and prosodic characteristics,
+and a synthesis hierarchy,
+mapping from the lower-dimensional features
+to continuous control signals
+manipulating high-dimensional parameters
+of a simulated vocal tract.
 
-XXXkeepgoingfromhere
+XXX: Figure of the two hierarchies and interactions
 
-Do adaptive control of
-articulatory speech synthesis
-using feedback from
-an auditory periphery model.
-This may involve the influence
-of other elements
-of the speech recognition pipeline,
-hence their inclusion in this proposal.
+Having both of these hierarchies
+in a single unified system
+allows for many feedback connections,
+both within each hierarchy
+and between them.
+For example,
+XXX go over a few possible interactions
 
-\subsection{Speech recognition}
+This type of large-scale unified system
+is a good long-term goal,
+and research in biologically plausible
+methods in speech should keep in mind
+this type of unified system
+as the details are filled in.
+However, filling in all of the details
+could take decades,
+and so I propose to begin
+with a minimal goal that still
+requires the interaction of both hierarchies,
+which can serve as a starting point
+for future work towards a large-scale
+unified model of human speech.
 
-While the Zilany model
-has closely replicated experimental data,
-and has proven useful in cochlear implants,
-it has not yet been used in the context
-of automatic speech recognition.
-There are several ways in which
-the Zilany model could be used
-to validate or improve automatic speech recognition.
+\subsection{Recognizing and articulating a small vocabulary}
 
-First, the model could be compared
-to existing methods used to map
-audio waveforms to frames;
-given many audio waveforms,
-is the Zilany model able to
-produce a representation that
-is better suited for speech recognition
-than existing methods
-(e.g., a method may be better suited
-if the distance in feature space
-between different phonemes is larger).
+The goal of the project is to
+use a speech recognition system
+to recognize a small vocabulary
+(for example, ten digits)
+and use the recognized and remembered
+speech samples to train
+an articulatory synthesizer
+to voice the same small vocabulary.
+The main challenges in this project
+are determining how to connect
+existing systems together
+and choosing representations that
+can be communicated between systems.
+The primary contribution of this project
+would be a method to train an
+articulatory synthesizer
+to voice a small vocabulary
+without requiring a large corpus
+of experimental data
+in order to determine control signals.
 
-Second, the Zilany model could
-replace the feature extractor
-in an existing speech recognition pipeline.
-This may uncover some features
-of the model that make it well suited
-to speech recognition that
-are difficult to reason about
-given the model's output alone.
+XXX: figure for proposed implementation
 
-Third, the Zilany model could
-act as the frontend to a
-speech recognition system
-fully realized in a spiking neural network.
-The output of the Zilany model
-is spike times;
-when integrating with existing
-speech recognition systems,
-the spikes would either be
-converted back to instantaneous rates,
-or the spike generator step
-would be omitted.
-However, there may be significant performance
-or efficiency gains to be had
-by communicating with spikes
-in a speech recognition system.
+Figure XXX proposed an implementation
+to achieve the goal of recognizing
+and articulating a small vocabulary.
+This implementation is inspired by
+how songbirds learn to voice
+learned songs (as summarized in Section~\ref{XXX}).
+In the first stage, the words from
+the vocabulary are fed to the
+recognition hierarchy.
+The job of the recognition hierarchy
+is to classify the incoming
+audio waveforms into the word
+being voiced,
+and to build up a representation
+of what those words sounds like;
+we will refer to this as
+\textit{template learning},
+borrowing the terminology
+from the birdsong literature.
+In the second stage, the templates
+are used to train the
+synthesis hierarchy.
+The job of the synthesis hierarchy
+is to voice the learned template words
+as accurately as possible.
+This will be done by replaying
+the learned templates and
+exploring the control parameter space
+to determine control signals
+that will match the learned templates;
+we will refer to this as
+\textit{motor learning}.
 
-\subsection{Speech synthesis}
+\subsubsection{Template learning}
 
-Can current vocal tract models give human-quality speech?
+Use Zilany auditory model
 
-We'll try using modern motor control to generate target sounds.
-We can use mngu0 sounds and fMRI for generating initial trajectories
+Use relatively simple classification to figure out word
 
-\subsection{Closed loop modeling}
+Use path integration model to track features over time
 
-Can synthesized speech
-influence auditory sensory learning,
-and vice versa?
+Average those paths together to figure out template (using DMPs?)
 
-We'll try to hook them up together
-and learn via babbling and outside teachers.
+\subsubsection{Motor learning}
 
-\subsection{Spiking neural networks}
+Randomly select chunks of the template and replay
+OR
+go through each word, syllable by syllable, phoneme by phoneme
+(learning phonemes might help, but I think that's for later
+-- possible future project for generalizing to new words)
 
-Can the previously discussed items
-be done in a biologically plausible manner?
-Are there any practical benefits to doing this?
+Sample motor parameters space to match that part of the template
+(maybe give it the lip and jaw positions because they're visible)
 
-We'll use the NEF to model some aspects of this.
-Some things,
-like representing the articular parameters with neurons,
-are trivial but provide good practical benefits
-since computer speech sound mechanical due to no noise.
+Replay the entire word's trajectory
 
+\subsection{Challenges}
+
+
+
+\subsection{Contributions}
 
 \end{document}
