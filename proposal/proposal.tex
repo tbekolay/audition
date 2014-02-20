@@ -12,6 +12,12 @@
 \usepackage{natbib}
 \usepackage{booktabs}
 \usepackage[top=1in,bottom=1in,left=1.5in,right=1.5in]{geometry}
+\hypersetup{
+  colorlinks = true, % Colours links instead of ugly boxes
+  urlcolor = blue, % Colour for external hyperlinks
+  linkcolor = blue, % Colour of internal links
+  citecolor = blue % Colour of citations
+}
 
 %\setlength{\parindent}{0pt}
 \setlength{\parskip}{2ex}
@@ -25,6 +31,8 @@
 \rfoot{}
 \renewcommand\headrulewidth{0.4pt}
 \renewcommand\footrulewidth{0pt}
+
+\graphicspath{{figures/}}
 
 % Make title
 \title{\bf Biologically plausible methods \\
@@ -92,9 +100,13 @@ resulting in a speech recognition ``pipeline.''
 While some techniques may span several levels
 of the pipeline, at its finest granularity,
 there are six levels to the pipeline,
-as shown in Figure 1.
+as shown in Figure~\ref{fig:recognition}.
 
-XXX: Insert figure 1 (like VanHoucke slide 22)
+\begin{figure}\begin{center}
+  \includegraphics[width=0.8\linewidth]{recognition}
+  \label{fig:recognition}
+  \caption{}
+\end{center}\end{figure}
 
 The pipeline begins with the \textit{audio waveform}.
 This one-dimensional signal transformed
@@ -113,13 +125,13 @@ that describe the frequency components
 of a slice of the audio waveform
 (typically around 10 milliseconds of audio).
 This transformation is typically done
-with Fourier analysis (XXXcite),
+with Fourier analysis,
 which is sometimes distributed
-to the Mel scale (XXXcite).
+to the Mel scale \citep{stevens1937}.
 However, more sophisticated methods
-such as Perceptual Linear Prediction (XXXcite),
-Linear Predictive Coding (XXXcite),
-and Cepstral analysis (XXXcite) have been
+such as Perceptual Linear Prediction \citep{hermansky1990},
+Linear Predictive Coding \citep{oshaughnessy1988},
+and Cepstral analysis \citep{furui1981} have been
 used to construct audio frames from a waveform.
 
 Each audio frame is then transformed
@@ -175,8 +187,8 @@ though more sophisticated language models exist.
 Little is known about the neurobiology
 of speech recognition;
 while several auditory pathways have been identified
-in the human brain (XXXcite),
-it is unknown if those pathways map onto
+in the human brain \citep{scott2003},
+it is unclear if those pathways map onto
 the speech recognition pipeline
 used in artificial intelligence.
 However, the first stage of the pipeline,
@@ -203,7 +215,7 @@ Briefly, the auditory periphery
 is responsible for sensing pressure waves
 in the air and transducing them into
 neural signals that we perceive as sound.
-As seen in Figure~XXX,
+As seen in Figure~\ref{fig:anatomy},
 air pressure waves are funneled into the auditory canal,
 causing the tympanic membrane (eardrum)
 to vibrate, which causes the stapes
@@ -233,7 +245,11 @@ The hair cells synapse with spiral ganglion neurons,
 whose axons form the auditory nerve
 (also known as the cochlear nerve).
 
-XXX: Insert Figure 2; auditory periphery basics
+\begin{figure}\begin{center}
+  \includegraphics[width=1\linewidth]{periphery-anatomy}
+  \label{fig:anatomy}
+  \caption{Anatomy of the auditory periphery.}
+\end{center}\end{figure}
 
 While the basic function of the auditory periphery
 is to separate the incoming vibrations
@@ -260,7 +276,8 @@ Bruce, Sachs \& Young
 and later extended by Zilany, Bruce, Nelson, \& Carney
 has been able to replicate
 many of the peculiarities
-of the biological auditory periphery (XXXcites),
+of the biological auditory periphery
+\citep{bruce2003,zilany2006,zilany2007,zilany2009,zilany2014},
 and has been used in cochlear implants
 due to its ability to produce
 similar signals as biological hair cells.
@@ -272,13 +289,17 @@ of interacting nonlinear filters
 which produce a membrane potential
 similar to that produced
 by inner hair cells along the basilar membrane
-(see Figure~XXX).
+(see Figure~\ref{fig:zilany}).
 This is fed into a synapse model and spike generator
 that emulates the action of cochlear cells,
 and produces the action potentials
 that travel along the auditory nerve.
 
-XXX: Figure 2 from Zilany 2009
+\begin{figure}\begin{center}
+  \includegraphics[width=1\linewidth]{zilany}
+  \label{fig:zilany}
+  \caption{}
+\end{center}\end{figure}
 
 The instantaneous pressure waveform
 (i.e., the audio input)
@@ -333,8 +354,7 @@ This synapse exhibits adaptation dynamics
 on at least three time scales:
 rapid adaptation on the scale of milliseconds,
 short-term adaptation on the scale of tens of milliseconds,
-and slow adaptation on the scale of seconds
-(XXXcite).
+and slow adaptation on the scale of seconds.
 Zilany et al. model each time scale explicitly.
 On the shortest time scale,
 adaptation is exponential.
@@ -359,7 +379,7 @@ as determined by the synapse model,
 is mapped to spike times
 through a nonhomogeneous Poisson process
 modified to include refractory effects.
-XXXciteZhang2001
+\cite{zhang2001}.
 
 \subsection{Speech synthesis}
 
@@ -429,7 +449,8 @@ as are used in speech recognition).
 While the results are generally good
 (concatenative synthesis is used in
 the majority of commercially available
-text-to-speech systems XXX) % http://www.theverge.com/2013/9/17/4596374/machine-language-how-siri-found-its-voice
+text-to-speech systems\footnote{See
+  \url{http://www.theverge.com/2013/9/17/4596374/machine-language-how-siri-found-its-voice}.})
 this technique is limited to the corpus
 of sounds available in the database.
 Additionally, there can be discontinuities
@@ -473,6 +494,17 @@ for the given word sequence, $\hat{o}$,
 is fed through a series of filters
 to generate synthesized speech.
 
+\begin{wrapfigure}{l}{0.421\textwidth}
+  \vspace{-30pt}
+  \begin{center}
+    \includegraphics[width=0.42\textwidth]{synthesizer}
+  \end{center}
+  \vspace{-12pt}
+  \label{fig:birkholz}
+  \caption{Birkholz articulatory synthesizer}
+  \vspace{-20pt}
+\end{wrapfigure}
+
 The most common method of implementing
 statistical parametric synthesis
 is to use an elaborate set of HMMs,
@@ -488,11 +520,12 @@ and other contextual cues
 can be collapsed into single HMM states,
 whereas in synthesis,
 all of these states must be explicitly tracked.
-In one system (XXXZen2007),
+In one system \citep{zen2007},
 there over a hundred parameters to be modeled.
 Like similar techniques in speech recognition,
 deep neural networks have begun
-to replace HMMs, with promising results (XXXZen2013).
+to replace HMMs, with promising results
+\citep{zen2013}.
 Despite these advances, concatenative systems
 were still judged the most natural
 at the 2012 Blizzard Challenge
@@ -538,8 +571,6 @@ The third is an \textit{acoustic model},
 which converts the geometries of the vocal tract
 into acoustic signals (i.e., audio waveforms).
 Each module has several classes of implementations.
-
-XXX: some articulatory synth figure
 
 One class of control models used in
 articulatory speech synthesis
@@ -614,7 +645,7 @@ A full three-dimensional representation
 of the patient's vocal tract
 can be reconstructed with sufficient data,
 and by using dimensionality reduction techniques
-(e.g., XXXbaden2001orwhatever),
+\citep[e.g.,]{badin2002},
 the articulatory control parameters
 can be of tractable dimensionality
 while still producing a full
@@ -688,6 +719,14 @@ and the type of noise generated
 by air turbulence can be changed
 to modify the final synthesized audio.
 
+\begin{wrapfigure}{l}{0.39\textwidth}
+  \vspace{-30pt}
+  \begin{center}
+    \includegraphics[width=0.39\textwidth]{birholz-params}
+  \end{center}
+  \vspace{-24pt}
+\end{wrapfigure}
+
 \subsubsection{Birkholz synthesizer}
 
 One of the most successful articulatory synthesizers
@@ -741,8 +780,6 @@ $MA2$ & Minimum area tongue tip region & 0.0 & 0.3 & cm$^2$ \\
 $MA3$ & Minimum area lip region & 0.0 & 0.3 & cm$^2$ \\
 \bottomrule
 \end{tabular}
-
-XXX: also include Fig 7 from Birkholz 2013
 
 The actions generated from
 the phonetic and prosodic representation
@@ -802,7 +839,7 @@ been able to discern
 plant positions over time
 for many utterances\footnote{This
 data is available for free in many cases;
-e.g., XXXmngu0 data}.
+e.g., \url{http://www.mngu0.org/}}.
 
 Recent advances in motor control
 may be applied to the problem
@@ -814,7 +851,7 @@ in the speech synthesis case,
 this would mean that the phoneme being voiced
 is the target of control,
 not all the degrees of freedom of the plant
-XXXcitenakanishis.
+\citep{nakanishi2008}.
 However, operation space control
 is primarily done in the context
 of rigid body dynamics systems;
@@ -824,7 +861,7 @@ is nontrivial.
 Recent approaches that learn
 operational space control
 may overcome those difficulties
-XXXcitepeters.
+\citep{peters2008}.
 
 Another promising direction
 for using modern motor control
@@ -832,7 +869,7 @@ in articulatory speech synthesis
 is to use existing techniques and data
 to define movement primitives,
 and use Dynamic Movement Primitives
-XXXciteschaal to flexibly combine them.
+\citep{schaal2006} to flexibly combine them.
 Especially promising about DMPs
 is that they are also defined
 for rhythmic motions,
@@ -874,13 +911,13 @@ that optimizes itself based on feedback.
 
 A concrete hypothesis on how
 this might be done was proposed by Kroger et al.
-XXXcite.
+\citep{kroger2009}.
 While their model uses less sophisticated
 methods than would be necessary
 to do state of the art speech
 recognition and synthesis,
 the overall structure of the model
-(shown in Figure~XXX)
+(shown in Figure~\ref{fig:loop})
 can serve as a good starting point
 for a closed-loop speech model.
 In particular, Kroger et al. have
@@ -900,7 +937,11 @@ to produce and perceive several phonemes
 using a training method analogous
 to human babbling.
 
-XXX include Kroger figures
+\begin{figure}\begin{center}
+  \includegraphics[width=1\linewidth]{kroeger}
+  \label{fig:loop}
+  \caption{}
+\end{center}\end{figure}
 
 While Kroger et al.
 do not term this structure
@@ -912,7 +953,7 @@ auditory map).
 Similar hierarchies have been explored
 in other projects by members of the
 Computational Neuroscience Research Group
-(e.g., Spaun XXXcite, NOCH XXXcite, Dan's HRL XXXcite).
+\citep[e.g.,]{eliasmith2012,dewolf2011,rasmussen-inpress}.
 
 Other models have been proposed
 that use auditory feedback
@@ -925,7 +966,7 @@ to reward the neural patterns
 responsible for producing
 recognizable utterances
 in a babbling context
-(XXXcite).
+\citep{warlaumont2012,warlaumont2013}.
 Howard \& Messum developed
 a model called Elija
 that goes even further,
@@ -999,13 +1040,17 @@ but not production,
 just as we might expect
 for a general well-trained motor action
 in the human brain
-XXXcitefiete.
+\citep{fiete2008}.
 Spiking neural models have been proposed
 in the context of this pathway
 that produce sequences of firing patterns,
-as observed in the avian brain (see Figure~below).
+as observed in the avian brain (see Figure~\ref{fig:birdsong}).
 
-XXX: figure1+2 in fiete
+\begin{figure}\begin{center}
+  \includegraphics[width=0.9\linewidth]{birdsong}
+  \label{fig:birdsong}
+  \caption{}
+\end{center}\end{figure}
 
 These firing sequences become
 a learned \textit{template} of the song.
@@ -1062,7 +1107,7 @@ but are biologically plausible,
 can generalize well, and operate in
 continuous, noisy domains.
 
-The Neural Engineering Framework (NEF; XXXcite)
+The Neural Engineering Framework (NEF; \citealp{eliasmith2003})
 provides a set of tools to implement
 AI and control theory models
 in spiking neural networks.
@@ -1113,7 +1158,7 @@ with the NEF several times successfully.
 To do transformations, the NEF
 optimizes the weights between two populations
 by solving a least-squares minimization problem.
-MacNeil \& Eliasmith XXXcite proposed
+\citet{macneil2011} proposed
 a learning rule that minimized the same
 error online, as long as an appropriate
 error signal is available.
@@ -1122,12 +1167,12 @@ with an unsupervised learning rule
 and showed that the error minimization
 can be done more effectively with
 the unsupervised component
-XXXcite.
+\citep{bekolay2013}.
 Recently, Crawford has experimented
 with other unsupervised rules
 and implemented them
 in a more scalable and efficient manner
-XXXcitecogsci.
+\citep{crawford-inpress}.
 
 \section{Proposal}
 
@@ -1262,5 +1307,8 @@ Replay the entire word's trajectory
 
 
 \subsection{Contributions}
+
+\bibliographystyle{plainnat}
+\bibliography{proposal}
 
 \end{document}
