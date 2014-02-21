@@ -103,7 +103,7 @@ there are six levels to the pipeline,
 as shown in Figure~\ref{fig:recognition}.
 
 \begin{figure}\begin{center}
-  \includegraphics[width=0.8\linewidth]{recognition}
+  %\includegraphics[width=0.8\linewidth]{recognition}
   \label{fig:recognition}
   \caption{}
 \end{center}\end{figure}
@@ -246,7 +246,7 @@ whose axons form the auditory nerve
 (also known as the cochlear nerve).
 
 \begin{figure}\begin{center}
-  \includegraphics[width=1\linewidth]{periphery-anatomy}
+  %\includegraphics[width=1\linewidth]{periphery-anatomy}
   \label{fig:anatomy}
   \caption{Anatomy of the auditory periphery.}
 \end{center}\end{figure}
@@ -296,7 +296,7 @@ and produces the action potentials
 that travel along the auditory nerve.
 
 \begin{figure}\begin{center}
-  \includegraphics[width=1\linewidth]{zilany}
+  %\includegraphics[width=1\linewidth]{zilany}
   \label{fig:zilany}
   \caption{}
 \end{center}\end{figure}
@@ -497,7 +497,7 @@ to generate synthesized speech.
 \begin{wrapfigure}{l}{0.421\textwidth}
   \vspace{-30pt}
   \begin{center}
-    \includegraphics[width=0.42\textwidth]{synthesizer}
+    %\includegraphics[width=0.42\textwidth]{synthesizer}
   \end{center}
   \vspace{-12pt}
   \label{fig:birkholz}
@@ -722,7 +722,7 @@ to modify the final synthesized audio.
 \begin{wrapfigure}{l}{0.39\textwidth}
   \vspace{-30pt}
   \begin{center}
-    \includegraphics[width=0.39\textwidth]{birholz-params}
+    %\includegraphics[width=0.39\textwidth]{birholz-params}
   \end{center}
   \vspace{-24pt}
 \end{wrapfigure}
@@ -938,7 +938,7 @@ using a training method analogous
 to human babbling.
 
 \begin{figure}\begin{center}
-  \includegraphics[width=1\linewidth]{kroeger}
+  %\includegraphics[width=1\linewidth]{kroeger}
   \label{fig:loop}
   \caption{}
 \end{center}\end{figure}
@@ -1047,7 +1047,7 @@ that produce sequences of firing patterns,
 as observed in the avian brain (see Figure~\ref{fig:birdsong}).
 
 \begin{figure}\begin{center}
-  \includegraphics[width=0.9\linewidth]{birdsong}
+  %\includegraphics[width=0.9\linewidth]{birdsong}
   \label{fig:birdsong}
   \caption{}
 \end{center}\end{figure}
@@ -1281,13 +1281,106 @@ we will refer to this as
 
 \subsubsection{Template learning}
 
-Use Zilany auditory model
+We propose a template learning system
+with three key components.
+The first is to use the Zilany
+auditory periphery model
+as a frontend.
+This model is described in more detail
+in section~\ref{XXX}.
+While it has not yet been shown
+that this model will produce features
+that make recognition easier or more efficient,
+we believe that using a model
+that produces spikes
+(which can be converted into
+instantaneous rates if desired)
+leaves open more possibilities
+for future model extensions.
+The second component of the model
+is a classification system
+to categorize auditory features into digits,
+and the third component
+is a path integration system
+to remember and replay the
+remembered auditory features
+of each digit.
 
-Use relatively simple classification to figure out word
+The classification system will be based
+on previous work XXXciteCogSci.
+In that work, we used visual features
+of digits to classify them
+using a biologically plausible learning rule
+operating in a spiking neural network
+created using the principles of the NEF.
+In this work, we will use auditory features,
+which (unlike the visual features used previously)
+change over time.
+While we believe that temporal information
+will improve the accuracy of classification,
+incorporating temporal information
+into the existing system will be a challenge.
 
-Use path integration model to track features over time
+The path integration model will be based
+on an existing line of models
+developed by XXXciteConklinEliasmith
+and an ongoing extension
+by Trujillo (unpublished).
+In these path integration models,
+a population of neurons tracks
+the spatial location of the subject
+over time.
+In this work, we will track
+auditory features over time
+instead of spatial location;
+however, the model scales up naturally
+to arbitrary dimensionality,
+so the model should not need
+significant modifications.
 
-Average those paths together to figure out template (using DMPs?)
+With these three systems,
+we propose a
+two stage template learning system.
+In the first stage,
+we train the classification system
+to recognize spoken digits
+given the auditory features
+produced by the Zilany model.
+Once digits can be accurately classified,
+we then build up a path through
+auditory feature space for each digit.
+Upon hearing a new utterance,
+the classification system
+would determine the digit being uttered;
+the path integration system
+would then replay the auditory features
+of that digit utterance
+and incorporate it into
+a ``template'' digit utterance,
+which would be similar to the
+average of all utterances
+the system has heard
+of that particular digit.
+
+An important possible extension to
+this template learning system
+(which are not likely to be
+part of the proposed work)
+is to make each learning stage
+hierarchical.
+The proposed system is likely
+to work well for a small vocabulary,
+but it is not feasible to learn
+every word in this way.
+Instead, it is likely that
+we start off by mapping
+from auditory features to words,
+but later on develop a hierarchical mapping
+from auditory features to phonemes,
+which in turn map to parts of words or words.
+This would allow for fast learning
+of new words by simply integrating
+a path through phoneme space.
 
 \subsubsection{Motor learning}
 
@@ -1307,6 +1400,8 @@ Replay the entire word's trajectory
 
 
 \subsection{Contributions}
+
+
 
 \bibliographystyle{plainnat}
 \bibliography{proposal}
