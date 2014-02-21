@@ -1384,24 +1384,122 @@ a path through phoneme space.
 
 \subsubsection{Motor learning}
 
-Randomly select chunks of the template and replay
-OR
-go through each word, syllable by syllable, phoneme by phoneme
-(learning phonemes might help, but I think that's for later
--- possible future project for generalizing to new words)
+The goal of the motor learning system
+is to control the Birkholz articulatory synthesizer
+such that it can match
+the template digit utterances learned
+by the template learning system.
+Unlike other control models, however,
+this system will start with
+no prior knowledge
+of the ``correct'' articulator positions
+(through MRI data, for example),
+and must instead learn
+to produce the target sounds
+through auditory feedback.
 
-Sample motor parameters space to match that part of the template
-(maybe give it the lip and jaw positions because they're visible)
+The motor learning system will
+attempt to match the learned template
+through repeated trials.
+On each trail,
+a control signal is generated,
+which controls the Birkholz
+articulatory synthesizer.
+The audio waveform produced
+by the synthesizer is fed
+into the Zilany auditory model,
+and the auditory features
+of the synthesized sound
+are compared to the template sound
+to produce an error signal.
+The motor system attempts
+to minimize this error signal
+on each subsequent trial.
+Using methods from
+reinforcement learning,
+we will explore the control parameter space
+and find a suitable trajectory
+through that space
+such that the error is minimized,
+which occurs when the synthesizer
+utters something that closely matches
+the remembered template utterance.
+Much like the path integration system
+is remembering a trajectory through
+auditory feature space,
+rather than physical space,
+this reinforcement learning system
+is learning a trajectory through
+articulatory parameter space,
+rather than physical space.
 
-Replay the entire word's trajectory
+There are a few ways to speed up
+the learning process that I plan to explore.
+The first speedup is to prematurely end trials
+if a certain amount of error has accumulated.
+A significant amount of learning time will
+be devoted to producing the first correct phoneme,
+and so it is more efficient to continually
+attempt to voice that phoneme
+than it is to continually attempt to voice
+all of the phonemes.
+Additionally, if that phoneme is not voiced properly,
+any sounds produced from that point on
+may not be voiced in the correct context;
+for example, the vocal tract is in a certain
+configuration before voicing the `n'
+in `one' than before voicing the `n' in `an.'
+Learning to voice a certain phoneme incorrectly
+may need to be unlearned, adding more time.
+The second speedup is to constrain the learning
+by fixing visible articulators to be
+the correct values during articulation.
+Some articulators like lip and jaw positions
+can be determined visually,
+and it is plausible that when attempting
+to match remembered templates
+that those articular positions are also
+remembered and replayed.
+The third speedup is to
+do some pretraining to determine
+how changing each control parameter
+affects the resulting audio waveform.
+XXX: Get that paper from Chris about solving for control params
+and fill out paragraph
+
+As with the template learning system,
+and important extension of this work
+would be to learn to voice
+the utterances in a hierarchical manner.
+Rather than learning
+to utter each template digit,
+a hierarchical system would instead
+learn how to utter each phoneme,
+and plan trajectories through phoneme space.
+However, for the small vocabulary proposed,
+this is not necessary.
 
 \subsection{Challenges}
 
+XXX: Fill out as I do a full edit...
 
+How to train the template classifier?
+Do we give an explicit label, or just an arbitrary vector
+(analogous to some external signal
+representing the concept of each digit)?
+Or do we do this in a completely unsupervised manner?
+
+What are the best chunks to replay for the motor learning system?
+Is there any way to transfer learning across the digits
+without using hierarchical ideas?
+
+We still aren't good at using reinforcement learning to go through a
+2D continuous space; the 23-dimensional articulatory control parameter
+space is much bigger than two dimensions...
 
 \subsection{Contributions}
 
-
+XXX: Fill out as I do a full edit...
 
 \bibliographystyle{plainnat}
 \bibliography{proposal}
