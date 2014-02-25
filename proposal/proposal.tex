@@ -9,7 +9,7 @@
 \usepackage[usenames,dvipsnames]{color}
 \usepackage{graphicx,float,wrapfig}
 \usepackage{inconsolata}
-\usepackage{natbib}
+\usepackage[round]{natbib}
 \usepackage{booktabs}
 \usepackage[top=1in,bottom=1in,left=1.5in,right=1.5in]{geometry}
 \hypersetup{
@@ -35,7 +35,7 @@
 \graphicspath{{figures/}}
 
 % Make title
-\title{\bf Biologically plausible methods \\
+\title{\bf Biologically inspired methods \\
   in speech recognition and synthesis: \\
   closing the loop}
 \date{\today}
@@ -48,17 +48,22 @@
 \maketitle
 
 \begin{abstract}
-  Abstract
+  XXX write
 \end{abstract}
 
 \section{Introduction}
+\label{sec:intro}
+
+XXX write
 
 \section{Background}
+\label{sec:background}
 
 \subsection{Speech recognition}
+\label{subsec:recognition}
 
 Automatic speech recognition
-is a large and growing field
+is a large and still growing field
 that has acted as a test bed
 for new AI techniques for decades,
 due to the allure of enabling
@@ -86,14 +91,14 @@ In the literature, these two terms
 are sometimes given explicit names.
 The probabilities of a word sequence
 occurring in a target language,
-$p(W)$, is called the \textit{language model}
+$P(W)$, is called the \textit{language model}
 and the distribution of waveforms
-given a word sequence, $p(O|W)$,
+given a word sequence, $P(O|W)$,
 is called the \textit{acoustic model}.
 
 In practice, these probability distributions
-are too large to compute,
-and instead the problem of speech recognition
+are far too large to compute;
+instead, the problem of speech recognition
 is broken down into several subproblems
 that are solved in sequence,
 resulting in a speech recognition ``pipeline.''
@@ -102,18 +107,20 @@ of the pipeline, at its finest granularity,
 there are six levels to the pipeline,
 as shown in Figure~\ref{fig:recognition}.
 
-\begin{figure}\begin{center}
-  %\includegraphics[width=0.8\linewidth]{recognition}
+\begin{figure}
+  \begin{center}
+    ~
+    %\includegraphics[width=0.8\linewidth]{recognition}
+  \end{center}
+  \caption{Speech recognition pipeline.}
   \label{fig:recognition}
-  \caption{}
-\end{center}\end{figure}
+\end{figure}
 
 The pipeline begins with the \textit{audio waveform}.
-This one-dimensional signal transformed
+This one-dimensional signal is transformed
 into a sequence of \textit{audio frames}
 in a process typically called feature extraction.
-In the case of audio signals,
-speech recognition researchers have followed
+Speech researchers have followed
 biology by using the frequency spectrum
 of the time-varying audio waveform
 as the primary feature to be extracted.
@@ -126,51 +133,59 @@ of a slice of the audio waveform
 (typically around 10 milliseconds of audio).
 This transformation is typically done
 with Fourier analysis,
-which is sometimes distributed
-to the Mel scale \citep{stevens1937}.
+which is sometimes sampled
+on the Mel scale
+(which is proportional to
+log frequency and is inspired
+by human perceptual studies; \citealp{stevens1937,furui1981}).
 However, more sophisticated methods
 such as Perceptual Linear Prediction \citep{hermansky1990},
-Linear Predictive Coding \citep{oshaughnessy1988},
-and Cepstral analysis \citep{furui1981} have been
-used to construct audio frames from a waveform.
+and Linear Predictive Coding \citep{oshaughnessy1988},
+have been used to construct audio frames from a waveform.
 
-Each audio frame is then transformed
-into a \textit{state}
+One or more audio frames are then mapped
+to a \textit{state}
 in a Hidden Markov Model (HMM).
 This transformation is also called
 \textit{acoustic modeling},
 as we are building a statistical model
-of the HMM states given the audio frame.
+of the subphonemic HMM states
+given the audio frame.
 The first generation of successful
 speech recognition systems
 used Gaussian Mixture Models
-to do efficient acoustic modeling.
+to do efficient acoustic modeling
+\citep{XXX}.
 However, modern speech recognition systems,
 such as those used by Google,
 use neural networks
 (specifically, neural networks trained with deep learning)
-for acoustic modeling.
+for acoustic modeling
+\citep{XXX}.
 
-Each state corresponds to a small window of time.
-Sequences of states are transformed
-into \textit{phonemes},
-which are the smallest atoms of speech
+Sequences of HMM states are transformed
+into \textit{phonemes}.
+There can be thousands of HMM states
+for a single phoneme \citep{XXX}.
+Phonemes are the smallest atoms of speech
 studied in linguistics,
 as they can be discriminated consciously by humans.
 Mapping from states to phonemes
 is typically done through a composition operation
-by a finite state transducer (FST).
+by a finite state transducer (FST; \citealp{XXX}).
 FSTs are heavily used in the higher levels
 of speech recognition,
 as they offer a mathematical formalism
-that can be manipulated with efficient algorithms.
+that can be manipulated with efficient algorithms
+\citep{XXX}.
 
 Phonemes are composed to form \textit{words}.
 The phonemes that make up each word
-can simply be looked up
+can be looked up
 in the target language's \textit{lexicon}.
 In practice, the lexicon is often encoded
-in a finite state transducer.
+in a finite state transducer
+\citep{XXX}.
 
 Words are composed to form \textit{sentences}.
 While this starts to encroach
@@ -179,10 +194,12 @@ such as grammar and syntax,
 most speech recognition systems
 use simple statistical techniques
 to determine if a sequence of words
-forms a sentence.
-Again, finite state transducers
-are a common technique here,
-though more sophisticated language models exist.
+forms a sentence \citep{XXX}.
+However, approaches that combine
+speech recognition and natural language processing
+are the subject of significant
+academic and industrial research
+\citep{XXX}.
 
 Little is known about the neurobiology
 of speech recognition;
@@ -206,8 +223,9 @@ for the remaining steps in the pipeline
 than existing techniques.
 
 \subsection{Auditory periphery modelling}
+\label{subsec:periphery}
 
-While the functions of areas in the brain
+While the functions of brain areas
 associated with auditory processing
 are largely unknown,
 the auditory periphery is well understood.
@@ -244,12 +262,15 @@ that is, they do not fire action potentials.
 The hair cells synapse with spiral ganglion neurons,
 whose axons form the auditory nerve
 (also known as the cochlear nerve).
+See \citealp{XXX} for a more detailed review.
 
-\begin{figure}\begin{center}
-  %\includegraphics[width=1\linewidth]{periphery-anatomy}
-  \label{fig:anatomy}
+\begin{figure}
+  \begin{center}
+    %\includegraphics[width=1\linewidth]{periphery-anatomy}
+  \end{center}
   \caption{Anatomy of the auditory periphery.}
-\end{center}\end{figure}
+  \label{fig:anatomy}
+\end{figure}
 
 While the basic function of the auditory periphery
 is to separate the incoming vibrations
@@ -269,7 +290,7 @@ make auditory periphery modeling
 significantly more complicated
 than just Fourier analysis.
 
-\subsubsection{Zilany model}
+\subsubsection{Zilany model} \label{subsec:zilany}
 
 A computational model proposed originally by
 Bruce, Sachs \& Young
@@ -284,22 +305,25 @@ similar signals as biological hair cells.
 We will refer to this as the
 Zilany model in the remainder of this proposal.
 
-The Zilany model consists of a series
+The Zilany model,
+summarized in Figure~\ref{fig:zilany},
+consists of a series
 of interacting nonlinear filters
 which produce a membrane potential
 similar to that produced
-by inner hair cells along the basilar membrane
-(see Figure~\ref{fig:zilany}).
+by inner hair cells along the basilar membrane.
 This is fed into a synapse model and spike generator
-that emulates the action of cochlear cells,
+that emulates spiral ganglion cells
 and produces the action potentials
 that travel along the auditory nerve.
 
-\begin{figure}\begin{center}
-  %\includegraphics[width=1\linewidth]{zilany}
+\begin{figure}
+  \begin{center}
+    % \includegraphics[width=1\linewidth]{zilany}
+  \end{center}
+  \caption{Zilany model.}
   \label{fig:zilany}
-  \caption{}
-\end{center}\end{figure}
+\end{figure}
 
 The instantaneous pressure waveform
 (i.e., the audio input)
@@ -334,7 +358,8 @@ The C1 filter is responsible for most
 low to medium frequency responses,
 modeling both inner and outer hair cell
 activity, resulting in a chirp filter.
-The C2 is responsible for high frequency responses,
+The C2 filter is responsible
+for high frequency responses,
 modeling inner hair cell activity
 with a wideband filter;
 the C2 filter is identical
@@ -348,7 +373,8 @@ to obtain the final output voltage
 of the inner hair cells.
 
 The resulting voltage from the inner hair cell
-is then communicated to a spiral ganglion cell
+is then communicated to
+a spiral ganglion-like spike generator
 through the IHC-AN synapse.
 This synapse exhibits adaptation dynamics
 on at least three time scales:
@@ -378,10 +404,11 @@ The spontaneous rate,
 as determined by the synapse model,
 is mapped to spike times
 through a nonhomogeneous Poisson process
-modified to include refractory effects.
-\cite{zhang2001}.
+modified to include refractory effects
+\citep{zhang2001}.
 
 \subsection{Speech synthesis}
+\label{subsec:synthesis}
 
 Speech synthesis is the converse
 of speech recognition;
@@ -394,14 +421,14 @@ to the pipeline for recognition,
 only in reverse:
 sentences are broken down into words,
 which are broken down into
-their underlying phonemes;
-this is typically called the
+their underlying phonemes.
+This is typically called the
 ``frontend'' of a speech synthesis system.
 The phonemes are then either
 directly converted into audio waveforms,
 or further broken down into
-smaller states which are converted to audio waveforms;
-this is typically called the ``backend''
+smaller states which are converted to audio waveforms.
+This is typically called the ``backend''
 of a speech synthesis system.
 
 While speech recognition
@@ -415,23 +442,23 @@ produce natural-sounding speech,
 but that speech is inflexible
 and cannot be modified
 to reflect the speaker's
-emotional state or speaking style,
-making it sounds prerecorded.
+emotional state or speaking style.
 Synthesis techniques
 that are more flexible exist,
-but are often computationally intensive,
-and often sound ``robotic,''
+but are computationally intensive,
+and sound ``robotic,''
 or too perfect,
 due to the way in which
 speech is produced.
 
 Currently, the dominant speech synthesis
-methods is concatenative (or unit selection) synthesis.
+methods is concatenative (or unit selection) synthesis
+\citep{XXX}.
 In concatenative synthesis, waveforms are generated
 by selecting and concatenating audio samples
 from a large database of recorded sounds
-(``units,'' typically phonemes, but sometimes
-smaller samples on the order of tens of milliseconds).
+(called ``units,'' which are typically phonemes,
+but may be shorter to capture coarticulation).
 Since the units are recordings of real speech,
 the result sounds natural.
 Audio databases typically contain samples with
@@ -439,7 +466,9 @@ varying prosodic characteristics
 (rhythm, stress, intonation)
 allowing for words to be synthesized
 using the underlying units
-with the desired prosodic characteristics.
+with the desired prosodic characteristics
+(as long as units with those characteristics
+have been recorded).
 Machine learning techniques
 are employed to efficiently search
 the database of units and combine
@@ -452,21 +481,23 @@ the majority of commercially available
 text-to-speech systems\footnote{See
   \url{http://www.theverge.com/2013/9/17/4596374/machine-language-how-siri-found-its-voice}.})
 this technique is limited to the corpus
-of sounds available in the database.
+of sounds available in the database,
+which can be costly to record.
 Additionally, there can be discontinuities
 in the transition from one unit
-to the next, making even the recorded
+to the next, making the recorded
 voice sample sound artificial.
 Attempts to modify the concatenated
 samples after the fact,
 to change its prosodic characteristics,
 for example, often require
 spectral transformations that also
-result in unnatural-sounding speech.
+result in unnatural-sounding speech
+\citep{XXX}.
 
 Advances in computing power
 have made statistical parametric synthesis
-techniques viable.
+techniques viable \citep{XXX}.
 While concatenative synthesis
 cobbles together speech using existing speech,
 statistical parametric synthesis
@@ -500,8 +531,8 @@ to generate synthesized speech.
     %\includegraphics[width=0.42\textwidth]{synthesizer}
   \end{center}
   \vspace{-12pt}
+  \caption{Birkholz articulatory synthesizer.}
   \label{fig:birkholz}
-  \caption{Birkholz articulatory synthesizer}
   \vspace{-20pt}
 \end{wrapfigure}
 
@@ -529,9 +560,11 @@ to replace HMMs, with promising results
 Despite these advances, concatenative systems
 were still judged the most natural
 at the 2012 Blizzard Challenge
-(2013 results not available at this time).
+(\citealp{XXX};
+2013 results not available at this time).
 
 \subsection{Articulatory speech synthesis}
+\label{subsec:articulatory}
 
 The most flexible approach to speech synthesis
 is articulatory speech synthesis.
@@ -541,9 +574,9 @@ airflow through the human vocal tract.
 While this method is
 the most closely tied to biology,
 and was used in the first fully automatic
-text-to-speech synthesizer,
+text-to-speech synthesizer \citep{XXX},
 its computational complexity
-and unnatural sounding results
+and artificial sounding results
 have hindered its adoption
 among academics and industry.
 Additionally, accurate simulation
@@ -555,10 +588,12 @@ However, unlike other methods,
 articulatory speech synthesis
 is able to test theories
 resulting from the biological exploration
-of sound production.
+of sound production
+and produce novel predictions.
 
 Generally, articulatory speech synthesizers
-consist of three (typically independent) modules.
+consist of three models
+\citep{XXXKroeger}.
 The first is a \textit{control model},
 which generates vocal tract movements
 by determining the desired positions
@@ -575,7 +610,8 @@ Each module has several classes of implementations.
 One class of control models used in
 articulatory speech synthesis
 are segmental control models,
-which work on a set of goals and constraints.
+which work on a set of goals and constraints
+\citep{XXX}.
 Given a phonological description
 of the utterance to be synthesized,
 segmental control models
@@ -608,7 +644,8 @@ also known as gestural control models,
 which define a set of discrete motor actions
 (i.e., motor primitives in motor control literature)
 that are combined to produce sounds according
-to a phonemic and prosodic description.
+to a phonemic and prosodic description
+\citep{XXX}.
 This leads to several levels of description.
 At the highest level,
 the description to voice an \textit{a}
@@ -627,38 +664,40 @@ that defines how each articulator
 moves over time.
 
 The control model is tightly coupled
-with the vocal tract model.
-The vocal tract model defines
-the articulators that can be controlled,
-and typically also provides some clue
+with the vocal tract model,
+since the vocal tract model defines
+the articulators that can be controlled.
+It also typically provides some clue
 for what articulator values
 are appropriate for the
-sound being synthesized.
+phoneme being synthesized.
 
 One class of vocal tract models
 are statistical models,
 which extract relevant characteristics
 from a large set of data,
 mostly magnetic resonance imaging (MRI)
-paired with audio recordings.
+paired with audio recordings
+\citep{XXX}.
 A full three-dimensional representation
 of the patient's vocal tract
 can be reconstructed with sufficient data,
 and by using dimensionality reduction techniques
-\citep[e.g.,]{badin2002},
+(e.g., \citealp{badin2002}),
 the articulatory control parameters
-can be of tractable dimensionality
+can be of relatively low dimensionality
 while still producing a full
 3D representation of a vocal tract.
 
 Another class of vocal tract models
 are biomechanical models,
 which attempt to fully reconstruct
-the physiology of the vocal tract.
-This type of model begins
-like the statistical model,
-using MRI and other anatomical measurements
-to develop a 3D representation
+the physiology of the vocal tract
+\citep{XXX}.
+This type of model is similar
+to the statistical model,
+in that MRI and other anatomical measurements
+are used to develop a 3D representation
 of the vocal tract.
 However, instead of statistically
 reducing the dimensionality
@@ -667,13 +706,15 @@ available to the control system,
 these models also model how
 muscle activations affect the shape
 of the vocal tract
-and use that as the articulator.
+and use each muscle
+as a degree of freedom.
 
 A final class of vocal tract models
 are geometric models,
 which generalize the overall
 shapes observed in
-MRI and anatomical studies.
+MRI and anatomical studies
+\citep{XXX}.
 A set of parameters
 are used to generate a 3D model
 of a vocal tract,
@@ -686,38 +727,42 @@ it can be used to generate vocal tracts
 from different subjects
 (both male and female).
 The parameters of the model
-can be tuned to a specific speaker,
+can therefore be tuned to a specific speaker,
 though the resulting vocal tract
-will not be as detailed.
+will not be as detailed
+as one determined solely through
+measurements of that speaker.
 
 Finally, the acoustic model takes
 a vocal tract representation
 and simulates the airflow from
 the lungs, through the vocal tract,
-to the air pressure coming out
-of the mouth (i.e., the audio waveform).
+to the air pressure coming out of the mouth.
 These models typically relate
-the vocal tract to some other physical
-device that has been modeled previously.
+the vocal tract to some other
+device with known physics.
 One set of models treat the vocal tract
 as an analog transmission line,
-which has been used to
-simulate arterial blood flow.
+similar to models simulating
+arterial blood flow \citep{XXX}.
 Another set of models treat the vocal tract
-as an analog electrical circuit.
+as an analog electrical circuit
+\citep{XXX}.
 A final set of models,
 called finite element wave propagation models,
-explicitly models the air pressure wave
+explicitly model the air pressure wave
 as it travels through each section
-of the vocal tract.
+of the vocal tract \citep{XXX}.
 Hybrid technique combine one
 of the above techniques
 with an analogous transformation
-in the frequency domain for added accuracy.
-Within these systems, the glottis
-and the type of noise generated
+in the frequency domain for added accuracy
+\citep{XXX}.
+Within these systems, the glottis model
+and the noise generated
 by air turbulence can be changed
-to modify the final synthesized audio.
+to modify the final synthesized audio waveform
+\citep{XXX}.
 
 \begin{wrapfigure}{l}{0.39\textwidth}
   \vspace{-30pt}
@@ -728,15 +773,17 @@ to modify the final synthesized audio.
 \end{wrapfigure}
 
 \subsubsection{Birkholz synthesizer}
+\label{subsec:birkholz}
 
-One of the most successful articulatory synthesizers
+One of the most successful articulatory
+synthesizers\footnote{An early version of the synthesizer
+  came second in a singing challenge
+  at Interspeech 2007; results available at
+  \url{http://www.interspeech2007.org/Technical/synthesis_of_singing_challenge.php}.}
 is one by Birtkholz et al,
 (available at \url{http://www.vocaltractlab.de/};
-we will refer to it as the Birkholz synthesizer)%
-\footnote{An early version of the synthesizer
-came second in a singing challenge
-at Interspeech 2007; results available at
-\url{http://www.interspeech2007.org/Technical/synthesis_of_singing_challenge.php}.}.
+\citealp{XXX}).
+We will refer to it as the Birkholz synthesizer.
 The Birkholz synthesizer uses
 an analog electrical circuit transmission line
 for generating acoustics,
@@ -781,27 +828,28 @@ $MA3$ & Minimum area lip region & 0.0 & 0.3 & cm$^2$ \\
 \bottomrule
 \end{tabular}
 
-The actions generated from
+In \citet{XXX}, the actions generated from
 the phonetic and prosodic representation
-are mapped to actions in this 23-dimensional space
+are mapped to changes in
+the 23-dimensional control parameters
 through analysis of MRI and dynamic MRI recordings
 of a single speaker.
 From that starting point,
 each vowel phoneme was optimized
 by minimizing the difference
 between the simulated formants
-and the speakers' formants\footnote{A
-speech formant is a frequency which should
-have maximum frequency for a specific
-sound. Three such formants have been identified
-for phonemes, though usually only the first
+and the speaker's formants\footnote{A
+speech formant is a frequency that
+has a high amplitude for a specific sound.
+Three such formants have been identified
+for most phonemes, though usually only the first
 two are necessary to uniquely identify
 a phoneme; for example, the long \textit{e}
 vowel sound (as in fr\textit{ee})
 can be uniquely identified with
 formants $f_1=240$ Hz and $f_2=2400$ Hz.}
-The optimizing procedure
-was a greedy hill-climbing algorithm
+The optimization
+was done using a greedy hill-climbing algorithm
 in which each degree of freedom in
 the control signal for a given vowel
 was varied positively and negatively
@@ -816,6 +864,7 @@ of greatly improved synthesis
 by using more sophisticated optimization techniques.
 
 \subsection{Motor control}
+\label{subsec:motor-control}
 
 Articulatory speech synthesis
 can be thought of as a
@@ -825,13 +874,15 @@ the plant is the vocal tract model,
 which has 23 degrees of freedom.
 However, as an additional difficulty
 above and beyond general motor control,
-the measurable outcome of the plant
-is a complex function of that
+the position of the plant is
+not necessarily measurable;
+instead, auditory feedback is
+a complex function of that
 23-dimensional vector,
 resulting in a scalar result
 that is difficult to map
 back to the plant movements.
-However, thanks to MRI and other
+Thanks to MRI and other
 imaging techniques,
 Birkholz and other articulatory
 synthesis researchers have
@@ -839,22 +890,29 @@ been able to discern
 plant positions over time
 for many utterances\footnote{This
 data is available for free in many cases;
-e.g., \url{http://www.mngu0.org/}}.
+e.g., the XXX data set,
+available at \url{http://www.mngu0.org/}},
+but the question of how humans
+are able to control our vocal tracts
+given only the auditory feedback
+remains unanswered.
 
 Recent advances in motor control
 may be applied to the problem
 of articulatory speech synthesis.
 One such advancement is recent work
-in the area of operational space control,
+in the area of operational space control (OSC),
 in which control is done in task space;
 in the speech synthesis case,
-this would mean that the phoneme being voiced
-is the target of control,
-not all the degrees of freedom of the plant
+this would mean that we could
+map from that task goal
+of voicing a phoneme
+to the control signal
+that accomplishes that goal
 \citep{nakanishi2008}.
 However, operation space control
 is primarily done in the context
-of rigid body dynamics systems;
+of systems with rigid body dynamics;
 adapting these algorithms
 to the dynamics of the vocal tract
 is nontrivial.
@@ -864,13 +922,14 @@ may overcome those difficulties
 \citep{peters2008}.
 
 Another promising direction
-for using modern motor control
-in articulatory speech synthesis
+for applying modern motor control
+to articulatory speech synthesis
 is to use existing techniques and data
 to define movement primitives,
-and use Dynamic Movement Primitives
-\citep{schaal2006} to flexibly combine them.
-Especially promising about DMPs
+and use Schaal's Dynamic Movement Primitives
+(DMPs; \citealp{schaal2006})
+to flexibly combine them.
+One aspect of DMPs that is especially promising
 is that they are also defined
 for rhythmic motions,
 like those found in the glottis
@@ -881,11 +940,11 @@ to combine OSC, DMPs, and other motor control concepts
 into a cohesive framework
 for controlling arbitrary plants.
 One such effort is being undertaken
-by the CNRG;
-I plan to leverage that work and adapt
-it for the auditory domain.
+by DeWolf et al. at the
+Computational Neuroscience Research Group.
 
-\subsection{Closed loop modelling}
+\subsection{closed-loop modelling}
+\label{subsec:closed-loop}
 
 One of the biggest challenges
 for using modern motor control algorithms
@@ -901,26 +960,26 @@ In order to control those parameters flexibly
 a control system should use feedback
 to fine-tune or completely learn
 the dynamics of the vocal tract.
-
-Several lines of research have converged recently
-to make such a closed loop model possible;
+The background that has been reviewed
+to this point can be combined
+to make such a closed-loop model possible;
 speech recognition can be done
 with a biologically plausible frontend,
 informing an articulatory speech synthesizer
-that optimizes itself based on feedback.
+that optimizes itself based on that feedback.
 
 A concrete hypothesis on how
-this might be done was proposed by Kroger et al.
-\citep{kroger2009}.
+this might be done was proposed by
+\citet{kroger2009}.
 While their model uses less sophisticated
 methods than would be necessary
-to do state of the art speech
-recognition and synthesis,
+to do state of the art
+speech recognition and synthesis,
 the overall structure of the model
 (shown in Figure~\ref{fig:loop})
-can serve as a good starting point
+serves as a good starting point
 for a closed-loop speech model.
-In particular, Kroger et al. have
+In particular, \citeauthor{kroger2009} have
 noted several important pathways
 that are likely to be essential
 to a closed-loop model.
@@ -932,64 +991,67 @@ and somatosensory feedback,
 which can train cortical areas
 dedicated to low-level motor control.
 Despite only using self-organizing maps,
-Kroger et al. was able to train their model
+\citeauthor{korger2009} were able to train their model
 to produce and perceive several phonemes
 using a training method analogous
 to human babbling.
 
-\begin{figure}\begin{center}
-  %\includegraphics[width=1\linewidth]{kroeger}
-  \label{fig:loop}
-  \caption{}
-\end{center}\end{figure}
+\begin{figure}
+  \begin{center}
+    %\includegraphics[width=1\linewidth]{kroeger}
+  \end{center}
+  \caption{\citeauthor{kroger2009}'s closed loop model.}
+  \label{fig:kroeger}
+\end{figure}
 
-While Kroger et al.
+While \citeauthor{kroger2009}
 do not term this structure
 as hierarchical,
-it can easily be phrased hierarchically
+it is hierarchical
 (e.g., the high-dimensional acoustic
 signal is reduced to a lower-dimensional
 auditory map).
 Similar hierarchies have been explored
 in other projects by members of the
 Computational Neuroscience Research Group
-\citep[e.g.,]{eliasmith2012,dewolf2011,rasmussen-inpress}.
+(e.g., \citealp{eliasmith2012,dewolf2011,rasmussen-inpress}).
 
-Other models have been proposed
+Other closed-loop models
+have been proposed
 that use auditory feedback
 to learn how to control
 an articulatory speech synthesizer.
-Warlaumont developed a spiking neural model
+\citeauthor{warlaumont2012}
+developed a spiking neural model
 that used a reinforcement-modulated
-spike timing dependent plasticity rule
-to reward the neural patterns
+spike-timing dependent plasticity rule
+to reward the firing patterns
 responsible for producing
 recognizable utterances
 in a babbling context
 \citep{warlaumont2012,warlaumont2013}.
-Howard \& Messum developed
-a model called Elija
+\citeauthor{howardXXX} developed
+a model called \textit{Elija}
 that goes even further,
 starting from babbling
 and progressing to learning
-the names of objects,
-though these objects all had
-single syllable names.
+the names of objects
+(though these objects all had
+single syllable names) \citep{XXX}.
 Their focus was on interaction
 between a human caregiver
 and the model through a microphone.
 
-All three of these
-(Kroger et al., Warlaumont, and \textit{Elija})
+All three of these closed-loop models
 use early childhood acquisition of speech
 to test their models,
-rather than on using feedback
+rather than using feedback
 to refine adult speech synthesis.
 The only study that I am aware of
 that attempts to do closed-loop learning
 on a sophisticated articulatory synthesizer
-is Prom-on et al. which attempted
-to minimize the error in frequency space
+is \citet{promonXXX}, which attempted
+to minimize the frequency error
 between a synthesized and target sound
 using a greedy stochastic gradient method.
 While they were able to produce
@@ -1005,14 +1067,10 @@ evidence that the Birkholz synthesizer's
 control parameters can be learned.
 
 \subsection{Spiking neural networks}
+\label{subsec:spiking}
 
-While the biologically inspired techniques
-previously discussed have
-promising characteristics,
-implementing them on traditional computers
-results in discrete and
-computationally intensive algorithms.
-Implementing them in the same way
+Implementing the previously discussed
+biologically inspired techniques in the same way
 that biological systems implement
 them---i.e., with spiking neurons---may
 provide benefits in terms of
@@ -1027,9 +1085,9 @@ rarely goes past the periphery,
 which has been presented above.
 However, studies of
 song recognition and production
-in birds has resulted in
-detailed models well grounded
-in biology, which may be analogous
+in songbirds has resulted in
+detailed models well grounded in biology,
+which may be analogous
 to human speech recognition and production.
 One key finding in this literature
 is that a pathway in the avian brain
@@ -1044,13 +1102,16 @@ in the human brain
 Spiking neural models have been proposed
 in the context of this pathway
 that produce sequences of firing patterns,
-as observed in the avian brain (see Figure~\ref{fig:birdsong}).
+as observed in the avian brain
+(see Figure~\ref{fig:birdsong} from \citep{XXX}).
 
-\begin{figure}\begin{center}
-  %\includegraphics[width=0.9\linewidth]{birdsong}
+\begin{figure}
+  \begin{center}
+    %\includegraphics[width=0.9\linewidth]{birdsong}
+  \end{center}
+  \caption{Birdsong}
   \label{fig:birdsong}
-  \caption{}
-\end{center}\end{figure}
+\end{figure}
 
 These firing sequences become
 a learned \textit{template} of the song.
@@ -1063,54 +1124,39 @@ suggesting that it is trying
 to match the learned template specifically.
 Models of this template-matching
 typically do some type of neurally
-implemented reinforcement learning.
+implemented reinforcement learning \citep{XXX}.
 
 Both of these processes---sequence generation
 through a cortex-basal ganglia-thalamus loop,
 and reinforcement learning in the same context---have
 been explored by members of the CNRG,
 specifically in this case by
-the proposer of this research.
+the proposer of this research
+\citep{XXX}.
 
 While these spiking models
 replicate avian experimental results well,
-we are only aware of one study that
+we are aware of only one study that
 has extrapolated these models
 to the domain of human speech:
-Yildiz et al. used a birdsong
+\citet{yildizXXX} used a birdsong
 circuit to do speech recognition
 with an error rate comparable
 to the HMM-based methods described previously.
 However, the vocabulary of words was very small
 (10 words, uttered by several different speakers),
-and the model did not use spiking neurons.
+and the model used a neuron model
+that produced firing rates rather than spike times.
 
 \subsubsection{Neural Engineering Framework}
-
-The models proposed in
-artificial intelligence and control theory typically
-have little in common with the spiking neural models
-proposed by computational neuroscientists.
-While AI models
-can perform tasks that are impressive to humans,
-they do so in a way
-that is not biologically plausible,
-often in a way that is specific
-to the task being solved,
-and often utilizes discrete approximations
-that appear ``robotic,'' especially
-in the context of speech.
-Spiking neural models,
-on the other hand,
-do not perform tasks humans cannot do,
-but are biologically plausible,
-can generalize well, and operate in
-continuous, noisy domains.
+\label{subsec:nef}
 
 The Neural Engineering Framework (NEF; \citealp{eliasmith2003})
-provides a set of tools to implement
-AI and control theory models
-in spiking neural networks.
+provides a set of tools to integrate
+the previously described
+spiking neural models,
+statistical models,
+and control theory models.
 The NEF defines three principles
 through which to represent
 information in spiking neural networks,
@@ -1119,64 +1165,72 @@ between populations of spiking neurons,
 and implement dynamics through
 recurrent connectivity.
 
-Using the NEF allows for more flexibility
+Implementing these models
+in the NEF ensures that all
+of the models can be integrated together
+and allows for more flexibility
 than traditional spiking neural networks,
 as the principles do not depend
-on a particular neuron model,
-and so rate-neuron models or even direct
-dynamical system computations
-can be simulated to validate models
+on a particular neuron model.
+Firing rate approximations
+and direct differential equation integration
+can be used to validate models
 before running a computationally intensive
 spiking neuron simulation.
 
-In short, the NEF provides
-the benefits of both AI/control theory models
-and computational neuroscience models.
-The primary downsides to using the NEF
-are additional complexity
-in constructing the model
-(the models are constrained in ways
-that AI models are not),
-and additional computational complexity.
+An important benefit to using the NEF
+is that known transformations
+(e.g., routing information from one area
+to another, or inverse Fourier transforms)
+can be optimized offline,
+while unknown transformations
+(e.g., the mapping from a waveform
+to a phoneme)
+can be learned online.
+An important downside to using the NEF
+is additional complexity
+in constructing models,
+and additional computational complexity
+in simulating models.
 
 \subsubsection{Learning}
+\label{subsec:learning}
 
-Learning is not a core principle of the NEF;
-yet, learning is a key component
-of speech recognition and synthesis systems.
-It is clear that the specifics
-of a language are not (and cannot)
-be hard-wired,
-and many of the models
-discussed above in this proposal
-involve learning through
-optimization or synaptic weight changes.
+As mentioned above, known transformations
+are implemented in the NEF by solving
+an optimization problem
+that results in a set of connection weights
+between two neural populations
+that implements the desired transformation.
+Unknown transformations are learned
+online with a learning rule
+that minimizes an arbitrary error signal
+\citep{macneil2011}.
 
-While not a core principle,
-learning has been applied to models constructed
-with the NEF several times successfully.
-To do transformations, the NEF
-optimizes the weights between two populations
-by solving a least-squares minimization problem.
-\citet{macneil2011} proposed
-a learning rule that minimized the same
-error online, as long as an appropriate
-error signal is available.
+The learning rule is
+\begin{equation}
+  XXX,
+\end{equation}
+where XXX.
+XXX Give some intuitions as to how this works
+
 Previously, I have combined that rule
 with an unsupervised learning rule
 and showed that the error minimization
 can be done more effectively with
 the unsupervised component
 \citep{bekolay2013}.
-Recently, Crawford has experimented
+Recently, \citeauthor{crawford-inpress}
+has experimented
 with other unsupervised rules
 and implemented them
 in a more scalable and efficient manner
 \citep{crawford-inpress}.
 
 \section{Proposal}
+\label{sec:proposal}
 
-All of the above background
+The reviewed background
 provides an optimistic long-term
 goal for a biologically plausible
 model of the speech system,
@@ -1191,7 +1245,8 @@ and mapping them to lower-dimensional
 features like word sequences
 and prosodic characteristics,
 and a synthesis hierarchy,
-mapping from the lower-dimensional features
+mapping from the lower-dimensional
+linguistic and prosodic features
 to continuous control signals
 manipulating high-dimensional parameters
 of a simulated vocal tract.
@@ -1208,25 +1263,22 @@ XXX go over a few possible interactions
 
 This type of large-scale unified system
 is a good long-term goal,
-and research in biologically plausible
-methods in speech should keep in mind
-this type of unified system
-as the details are filled in.
-However, filling in all of the details
-could take decades,
-and so I propose to begin
-with a minimal goal that still
-requires the interaction of both hierarchies,
-which can serve as a starting point
+but is not a reasonable
+goal in the span of a PhD.
+My PhD project is a subset
+of that long-term goal.
+It still requires the interaction of both hierarchies,
+and it can serve as a starting point
 for future work towards a large-scale
 unified model of human speech.
 
 \subsection{Recognizing and articulating a small vocabulary}
+\label{subsec:proposal}
 
-The goal of the project is to
+The goal of my PhD project is to
 use a speech recognition system
-to recognize a small vocabulary
-(for example, ten digits)
+to recognize a small vocabulary of words
+(for example, the ten digits)
 and use the recognized and remembered
 speech samples to train
 an articulatory synthesizer
@@ -1237,21 +1289,22 @@ existing systems together
 and choosing representations that
 can be communicated between systems.
 The primary contribution of this project
-would be a method to train an
+is a method to train an
 articulatory synthesizer
 to voice a small vocabulary
 without requiring a large corpus
 of experimental data
-in order to determine control signals.
+in order to determine appropriate control signals.
 
 XXX: figure for proposed implementation
 
-Figure XXX proposed an implementation
-to achieve the goal of recognizing
+Figure XXX proposes a system that
+achieves the goal of recognizing
 and articulating a small vocabulary.
 This implementation is inspired by
 how songbirds learn to voice
-learned songs (as summarized in Section~\ref{XXX}).
+learned songs
+(as summarized in Section~\ref{XXX}).
 In the first stage, the words from
 the vocabulary are fed to the
 recognition hierarchy.
@@ -1280,17 +1333,21 @@ we will refer to this as
 \textit{motor learning}.
 
 \subsubsection{Template learning}
+\label{subsec:template-learning}
 
 We propose a template learning system
 with three key components.
-The first is to use the Zilany
-auditory periphery model
-as a frontend.
-This model is described in more detail
+The first component is the Zilany
+auditory periphery model,
+which we will use as a frontend
+to extract auditory features
+from the input waveform.
+The Zilany model is described in more detail
 in section~\ref{XXX}.
 While it has not yet been shown
-that this model will produce features
-that make recognition easier or more efficient,
+that the Zilany model produces features
+that make recognition
+easier or more efficient,
 we believe that using a model
 that produces spikes
 (which can be converted into
@@ -1299,15 +1356,15 @@ leaves open more possibilities
 for future model extensions.
 The second component of the model
 is a classification system
-to categorize auditory features into digits,
+that categorizes auditory features into words,
 and the third component
 is a path integration system
 to remember and replay the
 remembered auditory features
-of each digit.
+for each word in the vocabulary.
 
 The classification system will be based
-on previous work XXXciteCogSci.
+on previous work \citep{XXXCogSci}.
 In that work, we used visual features
 of digits to classify them
 using a biologically plausible learning rule
@@ -1323,7 +1380,7 @@ into the existing system will be a challenge.
 
 The path integration model will be based
 on an existing line of models
-developed by XXXciteConklinEliasmith
+developed by \citet{XXXConklinEliasmith}
 and an ongoing extension
 by Trujillo (unpublished).
 In these path integration models,
@@ -1332,8 +1389,9 @@ the spatial location of the subject
 over time.
 In this work, we will track
 auditory features over time
-instead of spatial location;
-however, the model scales up naturally
+instead of spatial location.
+The \citeauthor{XXXConklinEliasmith}
+model scales up naturally
 to arbitrary dimensionality,
 so the model should not need
 significant modifications.
@@ -1347,13 +1405,14 @@ to recognize spoken digits
 given the auditory features
 produced by the Zilany model.
 Once digits can be accurately classified,
-we then build up a path through
+we move to the second stage
+in which we build up a path through
 auditory feature space for each digit.
 Upon hearing a new utterance,
 the classification system
 would determine the digit being uttered;
 the path integration system
-would then replay the auditory features
+will then replay the auditory features
 of that digit utterance
 and incorporate it into
 a ``template'' digit utterance,
@@ -1364,25 +1423,25 @@ of that particular digit.
 
 An important possible extension to
 this template learning system
-(which are not likely to be
-part of the proposed work)
-is to make each learning stage
-hierarchical.
+(which is not part of the proposed work)
+is to make each learning stage hierarchical.
 The proposed system is likely
 to work well for a small vocabulary,
-but it is not feasible to learn
-every word in this way.
+but it is unlikely to scale up to
+a human-scale vocabulary.
 Instead, it is likely that
-we start off by mapping
-from auditory features to words,
-but later on develop a hierarchical mapping
+early learning will occur this way
+(by mapping from auditory features to words),
+but later on we develop a hierarchical mapping
 from auditory features to phonemes,
-which in turn map to parts of words or words.
+which in turn maps to parts of words or words.
 This would allow for fast learning
-of new words by simply integrating
-a path through phoneme space.
+of new words by integrating
+a path through phoneme space
+instead of auditory feature space.
 
 \subsubsection{Motor learning}
+\label{subsec:motor-learning}
 
 The goal of the motor learning system
 is to control the Birkholz articulatory synthesizer
@@ -1394,7 +1453,7 @@ this system will start with
 no prior knowledge
 of the ``correct'' articulator positions
 (through MRI data, for example),
-and must instead learn
+and will instead learn
 to produce the target sounds
 through auditory feedback.
 
@@ -1407,7 +1466,7 @@ which controls the Birkholz
 articulatory synthesizer.
 The audio waveform produced
 by the synthesizer is fed
-into the Zilany auditory model,
+to the Zilany auditory model,
 and the auditory features
 of the synthesized sound
 are compared to the template sound
@@ -1433,8 +1492,11 @@ is learning a trajectory through
 articulatory parameter space,
 rather than physical space.
 
-There are a few ways to speed up
-the learning process that I plan to explore.
+Reinforcement learning in the high-dimensional
+articulatory parameter space
+is unlikely to be tractable.
+I will explore several ways to speed up
+the learning process.
 The first speedup is to prematurely end trials
 if a certain amount of error has accumulated.
 A significant amount of learning time will
@@ -1447,25 +1509,27 @@ Additionally, if that phoneme is not voiced properly,
 any sounds produced from that point on
 may not be voiced in the correct context;
 for example, the vocal tract is in a certain
-configuration before voicing the `n'
-in `one' than before voicing the `n' in `an.'
+configuration before voicing the \textit{n}
+in o\textit{n}e than before
+voicing the \textit{n} in a\textit{n}.
 Learning to voice a certain phoneme incorrectly
-may need to be unlearned, adding more time.
+may need to be unlearned.
 The second speedup is to constrain the learning
 by fixing visible articulators to be
 the correct values during articulation.
 Some articulators like lip and jaw positions
 can be determined visually,
 and it is plausible that when attempting
-to match remembered templates
-that those articular positions are also
+to match remembered templates,
+those articular positions are also
 remembered and replayed.
 The third speedup is to
-do some pretraining to determine
+do pretraining to determine
 how changing each control parameter
 affects the resulting audio waveform.
+
 XXX: Get that paper from Chris about solving for control params
-and fill out paragraph
+and give more detail on third speedup
 
 As with the template learning system,
 and important extension of this work
@@ -1477,29 +1541,109 @@ a hierarchical system would instead
 learn how to utter each phoneme,
 and plan trajectories through phoneme space.
 However, for the small vocabulary proposed,
-this is not necessary.
+we predict that this is not necessary.
 
-\subsection{Challenges}
+\section{Conclusion} \label{sec:conclusion}
 
-XXX: Fill out as I do a full edit...
+In this proposal,
+we have provided an optimistic long-term goal
+for a human speech system,
+which uses two interacting hierarchies
+to recognize and synthesize speech.
+We have proposed to create a smaller system
+that makes use of a minimal skeleton
+of the full human speech system
+in order to recognize and synthesize
+a ten word vocabulary.
 
-How to train the template classifier?
-Do we give an explicit label, or just an arbitrary vector
-(analogous to some external signal
-representing the concept of each digit)?
-Or do we do this in a completely unsupervised manner?
+\subsection{Challenges} \label{subsec:challenges}
 
-What are the best chunks to replay for the motor learning system?
-Is there any way to transfer learning across the digits
-without using hierarchical ideas?
+The primary challenge in the proposed system
+is to connect all of the
+systems combined in this work.
+As seen in Figure~\ref{XXX},
+there are XXX systems,
+which must communicate together
+through some protocol.
+XXXProtocols
 
-We still aren't good at using reinforcement learning to go through a
-2D continuous space; the 23-dimensional articulatory control parameter
-space is much bigger than two dimensions...
+Within these systems,
+necessary modifications provide
+additional challenges.
+In the classification system,
+temporal information
+must be incorporated in
+a system that has been used
+to classify static vectors.
+XXX ideas?
+
+Some of the proposed systems
+can be trained in different ways
+that will impact their efficiency and effectiveness.
+In the classification system,
+the easiest training method
+is to give the classifier
+the correct label during the training phase.
+However, the biological plausibility
+of such a training scheme is questionable.
+One alternative would be to
+use approximate labels;
+i.e., instead of just using a label,
+have that label be bound together
+with some random information.
+Another alternative would be
+to do completely unsupervised learning,
+and hope that the words in the vocabulary
+are far enough in auditory feature space
+to be modeled with some kind of
+unsupervised learning.
+In the motor learning system,
+we have proposed to learn to voice
+the first phoneme and then each
+subsequent phoneme serially.
+However, it may be the case that
+learning different subsets
+of the auditory sequence
+will be beneficial.
+Additionally, it may be the case
+that it is not possible
+to learn a good trajectory
+through control parameter space
+with no prior knowledge.
+In that case, we can bootstrap the system
+with existing control methods.
 
 \subsection{Contributions}
+\label{subsec:contributions}
 
-XXX: Fill out as I do a full edit...
+Speech recognition and synthesis
+are problems that have been worked
+on for half a century in both academia and industry;
+achieving lower error rates
+than state of the art recognition systems
+and producing speech that sounds as natural
+as systems that use a huge corpus
+of recorded speech are
+difficult goals to achieve.
+The primary contribution of the proposed work
+is not to improve on the state of the art,
+but to integrate multiple systems together
+such that, in the future,
+state of the art systems
+can be combined together
+to improve one another.
+Part of achieving this goal will involve
+integrating many systems together,
+most using the NEF to represent
+and transform information.
+By doing this, we also wish to show
+that implemented biologically inspired methods
+in a neural architecture
+can provide quantifiable benefits
+in terms of parallelizing expensive computations
+and reducing the number of data conversions
+that have to occur.
+XXX improve on this obviously
 
 \bibliographystyle{plainnat}
 \bibliography{proposal}
