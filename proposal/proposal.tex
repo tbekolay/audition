@@ -48,13 +48,80 @@
 \maketitle
 
 \begin{abstract}
-  XXX write
+  I propose to build a system that recognizes
+  a small vocabulary of words,
+  and synthesizes that same vocabulary
+  with no prior knowledge.
+  The system will use biologically inspired methods:
+  the speech recognizer will use a
+  human auditory periphery model
+  to transduce audio signals,
+  and the synthesizer will
+  produce audio signals
+  using a model of the human vocal tract
+  with 23 articulators.
+  The two systems will have
+  reciprocal connections,
+  closing the perception-action loop
+  and providing a starting point for
+  larger systems combining
+  sophisticated hierarchical
+  recognition and synthesis systems.
 \end{abstract}
 
 \section{Introduction}
 \label{sec:intro}
 
-XXX write
+The human auditory system is an
+amazing piece of engineering;
+we are able to utter hundreds of phonemes,
+which we blend together---without pauses---into
+sentences that we recognize effortlessly,
+despite huge variations in the
+volume and intelligibility of
+those phonemes,
+and even in noisy rooms with
+dozens of overlapping speakers.
+Attempts to replicate the human auditory system
+in computers have resulted in
+speech recognition systems with
+high accuracy in certain environments,
+and speech synthesizers that
+can voice novel utterances
+in a recognizable and
+(mostly) natural way.
+Unlike the human auditory system, however,
+speech recognition systems
+and speech synthesis systems
+are separate non-interacting systems;
+there is currently no system
+that listens to the audio it produces
+and adapts itself to recognize
+and synthesize better speech over time.
+
+My project aims to close this loop
+and show that computational
+recognition and synthesis systems
+can be used to improve each other over time,
+as biological systems do.
+I will also exploit how biological systems
+represent and transform information
+to pass data between the interacting systems
+in a form that can be understood by both.
+Specifically, I will build the interacting
+recognition and synthesis systems
+as spiking neural networks using the
+methods of the Neural Engineering Framework.
+In doing so, I hope to make contributions
+to speech science by showing that
+recognition and synthesis systems
+can improve each other,
+and to neuroscience by providing
+a concrete hypothesis of how
+the human auditory system
+might be organized
+that can be used to generate
+experimentally testable predictions.
 
 \section{Background}
 \label{sec:background}
@@ -155,29 +222,29 @@ The first generation of successful
 speech recognition systems
 used Gaussian Mixture Models
 to do efficient acoustic modeling
-\citep{XXX}.
+(e.g., \citealp{reynolds1995}).
 However, modern speech recognition systems,
 such as those used by Google,
 use neural networks
 (specifically, neural networks trained with deep learning)
 for acoustic modeling
-\citep{XXX}.
+(e.g., \citealp{jaitly2012}).
 
 Sequences of HMM states are transformed
 into \textit{phonemes}.
-There can be thousands of HMM states
-for a single phoneme \citep{XXX}.
+There can be many HMM states
+for a single phoneme \citep{rabiner1989}.
 Phonemes are the smallest atoms of speech
 studied in linguistics,
 as they can be discriminated consciously by humans.
 Mapping from states to phonemes
 is typically done through a composition operation
-by a finite state transducer (FST; \citealp{XXX}).
+by a finite state transducer (FST; \citealp{mohri2002}).
 FSTs are heavily used in the higher levels
 of speech recognition,
 as they offer a mathematical formalism
 that can be manipulated with efficient algorithms
-\citep{XXX}.
+\citep{mohri2000}.
 
 Phonemes are composed to form \textit{words}.
 The phonemes that make up each word
@@ -185,7 +252,7 @@ can be looked up
 in the target language's \textit{lexicon}.
 In practice, the lexicon is often encoded
 in a finite state transducer
-\citep{XXX}.
+\citep{mohri2002}.
 
 Words are composed to form \textit{sentences}.
 While this starts to encroach
@@ -194,12 +261,12 @@ such as grammar and syntax,
 most speech recognition systems
 use simple statistical techniques
 to determine if a sequence of words
-forms a sentence \citep{XXX}.
+forms a sentence.
 However, approaches that combine
 speech recognition and natural language processing
 are the subject of significant
 academic and industrial research
-\citep{XXX}.
+(e.g., \citealp{sagae2009}).
 
 Little is known about the neurobiology
 of speech recognition;
@@ -262,7 +329,6 @@ that is, they do not fire action potentials.
 The hair cells synapse with spiral ganglion neurons,
 whose axons form the auditory nerve
 (also known as the cochlear nerve).
-See \citealp{XXX} for a more detailed review.
 
 \begin{figure}
   \begin{center}
@@ -453,7 +519,7 @@ speech is produced.
 
 Currently, the dominant speech synthesis
 methods is concatenative (or unit selection) synthesis
-\citep{XXX}.
+\citep{hunt1996}.
 In concatenative synthesis, waveforms are generated
 by selecting and concatenating audio samples
 from a large database of recorded sounds
@@ -493,11 +559,11 @@ to change its prosodic characteristics,
 for example, often require
 spectral transformations that also
 result in unnatural-sounding speech
-\citep{XXX}.
+\citep{schroder2001}.
 
 Advances in computing power
 have made statistical parametric synthesis
-techniques viable \citep{XXX}.
+techniques viable \citep{zen2009}.
 While concatenative synthesis
 cobbles together speech using existing speech,
 statistical parametric synthesis
@@ -560,7 +626,7 @@ to replace HMMs, with promising results
 Despite these advances, concatenative systems
 were still judged the most natural
 at the 2012 Blizzard Challenge
-(\citealp{XXX};
+(\citealp{kinga2012};
 2013 results not available at this time).
 
 \subsection{Articulatory speech synthesis}
@@ -574,7 +640,7 @@ airflow through the human vocal tract.
 While this method is
 the most closely tied to biology,
 and was used in the first fully automatic
-text-to-speech synthesizer \citep{XXX},
+text-to-speech synthesizer \citep{klatt1987},
 its computational complexity
 and artificial sounding results
 have hindered its adoption
@@ -593,7 +659,7 @@ and produce novel predictions.
 
 Generally, articulatory speech synthesizers
 consist of three models
-\citep{XXXKroeger}.
+\citep{kroger2009}.
 The first is a \textit{control model},
 which generates vocal tract movements
 by determining the desired positions
@@ -611,7 +677,7 @@ One class of control models used in
 articulatory speech synthesis
 are segmental control models,
 which work on a set of goals and constraints
-\citep{XXX}.
+\citep{kroger1992}.
 Given a phonological description
 of the utterance to be synthesized,
 segmental control models
@@ -645,7 +711,7 @@ which define a set of discrete motor actions
 (i.e., motor primitives in motor control literature)
 that are combined to produce sounds according
 to a phonemic and prosodic description
-\citep{XXX}.
+\citep{birkholz2006}.
 This leads to several levels of description.
 At the highest level,
 the description to voice an \textit{a}
