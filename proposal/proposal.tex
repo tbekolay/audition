@@ -385,7 +385,7 @@ that travel along the auditory nerve.
 
 \begin{figure}
   \begin{center}
-    % \includegraphics[width=1\linewidth]{zilany}
+    \includegraphics[width=1\linewidth]{zilany}
   \end{center}
   \caption{Zilany model.}
   \label{fig:zilany}
@@ -594,7 +594,7 @@ to generate synthesized speech.
 \begin{wrapfigure}{l}{0.421\textwidth}
   \vspace{-30pt}
   \begin{center}
-    %\includegraphics[width=0.42\textwidth]{synthesizer}
+    \includegraphics[width=0.42\textwidth]{birkholz}
   \end{center}
   \vspace{-12pt}
   \caption{Birkholz articulatory synthesizer.}
@@ -744,12 +744,11 @@ which extract relevant characteristics
 from a large set of data,
 mostly magnetic resonance imaging (MRI)
 paired with audio recordings
-\citep{XXX}.
+(e.g., \citealp{badin2002}).
 A full three-dimensional representation
 of the patient's vocal tract
 can be reconstructed with sufficient data,
-and by using dimensionality reduction techniques
-(e.g., \citealp{badin2002}),
+and by using dimensionality reduction techniques,
 the articulatory control parameters
 can be of relatively low dimensionality
 while still producing a full
@@ -759,7 +758,7 @@ Another class of vocal tract models
 are biomechanical models,
 which attempt to fully reconstruct
 the physiology of the vocal tract
-\citep{XXX}.
+(e.g., \citealp{dang2004}).
 This type of model is similar
 to the statistical model,
 in that MRI and other anatomical measurements
@@ -780,7 +779,7 @@ are geometric models,
 which generalize the overall
 shapes observed in
 MRI and anatomical studies
-\citep{XXX}.
+(e.g., \citep{mermelstein1973}).
 A set of parameters
 are used to generate a 3D model
 of a vocal tract,
@@ -810,30 +809,29 @@ device with known physics.
 One set of models treat the vocal tract
 as an analog transmission line,
 similar to models simulating
-arterial blood flow \citep{XXX}.
+arterial blood flow \citep{meyer1989}.
 Another set of models treat the vocal tract
 as an analog electrical circuit
-\citep{XXX}.
+\citep{maeda1982}.
 A final set of models,
 called finite element wave propagation models,
 explicitly model the air pressure wave
 as it travels through each section
-of the vocal tract \citep{XXX}.
+of the vocal tract \citep{elmasri1996}.
 Hybrid technique combine one
 of the above techniques
 with an analogous transformation
 in the frequency domain for added accuracy
-\citep{XXX}.
+\citep{sondhi1987}.
 Within these systems, the glottis model
 and the noise generated
 by air turbulence can be changed
-to modify the final synthesized audio waveform
-\citep{XXX}.
+to modify the final synthesized audio waveform.
 
 \begin{wrapfigure}{l}{0.39\textwidth}
   \vspace{-30pt}
   \begin{center}
-    %\includegraphics[width=0.39\textwidth]{birholz-params}
+    \includegraphics[width=0.39\textwidth]{birholz-params}
   \end{center}
   \vspace{-24pt}
 \end{wrapfigure}
@@ -848,7 +846,7 @@ synthesizers\footnote{An early version of the synthesizer
   \url{http://www.interspeech2007.org/Technical/synthesis_of_singing_challenge.php}.}
 is one by Birtkholz et al,
 (available at \url{http://www.vocaltractlab.de/};
-\citealp{XXX}).
+\citealp{birkholz2013}).
 We will refer to it as the Birkholz synthesizer.
 The Birkholz synthesizer uses
 an analog electrical circuit transmission line
@@ -894,7 +892,7 @@ $MA3$ & Minimum area lip region & 0.0 & 0.3 & cm$^2$ \\
 \bottomrule
 \end{tabular}
 
-In \citet{XXX}, the actions generated from
+In \citet{birkholz2013}, the actions generated from
 the phonetic and prosodic representation
 are mapped to changes in
 the 23-dimensional control parameters
@@ -1009,7 +1007,7 @@ One such effort is being undertaken
 by DeWolf et al. at the
 Computational Neuroscience Research Group.
 
-\subsection{closed-loop modelling}
+\subsection{Closed-loop modelling}
 \label{subsec:closed-loop}
 
 One of the biggest challenges
@@ -1057,7 +1055,7 @@ and somatosensory feedback,
 which can train cortical areas
 dedicated to low-level motor control.
 Despite only using self-organizing maps,
-\citeauthor{korger2009} were able to train their model
+\citeauthor{kroger2009} were able to train their model
 to produce and perceive several phonemes
 using a training method analogous
 to human babbling.
@@ -1096,14 +1094,14 @@ responsible for producing
 recognizable utterances
 in a babbling context
 \citep{warlaumont2012,warlaumont2013}.
-\citeauthor{howardXXX} developed
+\citeauthor{howard2011} developed
 a model called \textit{Elija}
 that goes even further,
 starting from babbling
 and progressing to learning
 the names of objects
 (though these objects all had
-single syllable names) \citep{XXX}.
+single syllable names) \citep{howard2011}.
 Their focus was on interaction
 between a human caregiver
 and the model through a microphone.
@@ -1116,7 +1114,7 @@ to refine adult speech synthesis.
 The only study that I am aware of
 that attempts to do closed-loop learning
 on a sophisticated articulatory synthesizer
-is \citet{promonXXX}, which attempted
+is \citet{prom2013}, which attempted
 to minimize the frequency error
 between a synthesized and target sound
 using a greedy stochastic gradient method.
@@ -1169,7 +1167,7 @@ Spiking neural models have been proposed
 in the context of this pathway
 that produce sequences of firing patterns,
 as observed in the avian brain
-(see Figure~\ref{fig:birdsong} from \citep{XXX}).
+(see Figure~\ref{fig:birdsong} from \citealp{fiete2008}).
 
 \begin{figure}
   \begin{center}
@@ -1190,7 +1188,8 @@ suggesting that it is trying
 to match the learned template specifically.
 Models of this template-matching
 typically do some type of neurally
-implemented reinforcement learning \citep{XXX}.
+implemented reinforcement learning
+(e.g., \citealp{fiete2007}).
 
 Both of these processes---sequence generation
 through a cortex-basal ganglia-thalamus loop,
@@ -1198,14 +1197,14 @@ and reinforcement learning in the same context---have
 been explored by members of the CNRG,
 specifically in this case by
 the proposer of this research
-\citep{XXX}.
+\citep{stewart2012}.
 
 While these spiking models
 replicate avian experimental results well,
 we are aware of only one study that
 has extrapolated these models
 to the domain of human speech:
-\citet{yildizXXX} used a birdsong
+\citet{yildiz2013} used a birdsong
 circuit to do speech recognition
 with an error rate comparable
 to the HMM-based methods described previously.
@@ -1430,8 +1429,8 @@ remembered auditory features
 for each word in the vocabulary.
 
 The classification system will be based
-on previous work \citep{XXXCogSci}.
-In that work, we used visual features
+on my previous work.
+In \citet{bekolay2013}, we used visual features
 of digits to classify them
 using a biologically plausible learning rule
 operating in a spiking neural network
@@ -1446,7 +1445,7 @@ into the existing system will be a challenge.
 
 The path integration model will be based
 on an existing line of models
-developed by \citet{XXXConklinEliasmith}
+developed by \citet{conklin2005}
 and an ongoing extension
 by Trujillo (unpublished).
 In these path integration models,
@@ -1456,7 +1455,7 @@ over time.
 In this work, we will track
 auditory features over time
 instead of spatial location.
-The \citeauthor{XXXConklinEliasmith}
+The \citeauthor{conklin2005}
 model scales up naturally
 to arbitrary dimensionality,
 so the model should not need
