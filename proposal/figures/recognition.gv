@@ -1,0 +1,13 @@
+digraph recognition {
+  rankdir=LR
+  graph [fontname="Arial"]
+  node [colorscheme=pastel14, color=4]
+  node [shape=rect, style="rounded,filled", penwidth=0]
+  node [fontname="Arial"]
+  edge [fontname="Arial"]
+  Audio -> Frame [label="Feature\nExtraction"]
+  Frame  -> State [label="Acoustic\nModel"]
+  State -> Phoneme [label="Decision\nTrees"]
+  Phoneme -> Word [label="Lexicon"]
+  Word -> Sentence [label="Language\nModel"]
+}
