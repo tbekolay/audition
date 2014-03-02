@@ -355,7 +355,8 @@ make auditory periphery modeling
 significantly more complicated
 than just Fourier analysis.
 
-\subsubsection{Zilany model} \label{subsec:zilany}
+\subsubsection{Zilany model}
+\label{subsec:zilany}
 
 A computational model proposed originally by
 Bruce, Sachs \& Young
@@ -953,7 +954,7 @@ been able to discern
 plant positions over time
 for many utterances\footnote{This
 data is available for free in many cases;
-e.g., the XXX data set,
+e.g., the \textit{mngu0} data set,
 available at \url{http://www.mngu0.org/}},
 but the question of how humans
 are able to control our vocal tracts
@@ -1061,7 +1062,7 @@ to human babbling.
 
 \begin{figure}
   \begin{center}
-    %\includegraphics[width=1\linewidth]{kroger}
+    \includegraphics[width=0.8\linewidth]{kroger}
   \end{center}
   \caption{\citeauthor{kroger2009}'s closed loop model.}
   \label{fig:kroeger}
@@ -1273,10 +1274,28 @@ that minimizes an arbitrary error signal
 
 The learning rule is
 \begin{equation}
-  XXX,
+  \Delta \omega_{ij} \propto \alpha_j \mathbf{e}_j \cdot \mathbf{E} a_i,
 \end{equation}
-where XXX.
-XXX Give some intuitions as to how this works
+where $\Delta \omega_{ij}$ is the change in
+the connection weight between
+a presynaptic neuron indexed with $i$
+and a postsynaptic neuron index with $j$,
+$\mathbf{e}_j$ describes the type of signals
+neuron $j$ is sensitive to,
+$\alpha_j$ describes how sensitive
+it is to that signal,
+$\mathbf{E}$ is the error signal being minimized,
+and $a_i$ is the activity of neuron $i$.
+This learning rule can be thought of
+as a type of gradient descent learning
+similar to back-propagation,
+except that rather than using
+derivatives to determine which
+neurons are responsible for the overall error,
+this rule uses the similarity (i.e., dot product)
+between the overall error, $\mathbf{E}$,
+and the part of the vector space
+that the neuron is sensitive to, $\mathbf{e}_j$.
 
 Previously, I have combined that rule
 with an unsupervised learning rule
@@ -1315,7 +1334,14 @@ to continuous control signals
 manipulating high-dimensional parameters
 of a simulated vocal tract.
 
-XXX: Figure of the two hierarchies and interactions
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=0.7\linewidth]{longterm}
+  \end{center}
+  \caption{Long-term goal for a system consisting
+    of interacting recognition and synthesis systems.}
+  \label{fig:longterm}
+\end{figure}
 
 Having both of these hierarchies
 in a single unified system
@@ -1360,7 +1386,14 @@ without requiring a large corpus
 of experimental data
 in order to determine appropriate control signals.
 
-XXX: figure for proposed implementation
+\begin{figure}
+  \begin{center}
+    %\includegraphics[width=0.7\linewidth]{shortterm}
+  \end{center}
+  \caption{Short-term goal for a system consisting
+    of interacting recognition and synthesis systems.}
+  \label{fig:shortterm}
+\end{figure}
 
 Figure XXX proposes a system that
 achieves the goal of recognizing
@@ -1368,7 +1401,7 @@ and articulating a small vocabulary.
 This implementation is inspired by
 how songbirds learn to voice
 learned songs
-(as summarized in Section~\ref{XXX}).
+(as summarized in Section~\ref{subsec:spiking}).
 In the first stage, the words from
 the vocabulary are fed to the
 recognition hierarchy.
@@ -1407,7 +1440,7 @@ which we will use as a frontend
 to extract auditory features
 from the input waveform.
 The Zilany model is described in more detail
-in section~\ref{XXX}.
+in section~\ref{subsec:zilany}.
 While it has not yet been shown
 that the Zilany model produces features
 that make recognition
@@ -1591,9 +1624,11 @@ The third speedup is to
 do pretraining to determine
 how changing each control parameter
 affects the resulting audio waveform.
-
-XXX: Get that paper from Chris about solving for control params
-and give more detail on third speedup
+This can be done independent
+of the desired target signal;
+the goal would be to determine
+the effect of moving a single articulator
+on the audio waveform being generated.
 
 As with the template learning system,
 and important extension of this work
@@ -1707,6 +1742,7 @@ can provide quantifiable benefits
 in terms of parallelizing expensive computations
 and reducing the number of data conversions
 that have to occur.
+
 XXX improve on this obviously
 
 \bibliographystyle{plainnat}
