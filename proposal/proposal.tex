@@ -1171,6 +1171,7 @@ as observed in the avian brain
 
 \begin{figure}
   \begin{center}
+    XXX
     %\includegraphics[width=0.9\linewidth]{birdsong}
   \end{center}
   \caption{Birdsong}
@@ -1388,14 +1389,14 @@ in order to determine appropriate control signals.
 
 \begin{figure}
   \begin{center}
-    %\includegraphics[width=0.7\linewidth]{shortterm}
+    \includegraphics[width=0.7\linewidth]{shortterm}
   \end{center}
   \caption{Short-term goal for a system consisting
     of interacting recognition and synthesis systems.}
   \label{fig:shortterm}
 \end{figure}
 
-Figure XXX proposes a system that
+Figure~\ref{fig:shortterm} proposes a system that
 achieves the goal of recognizing
 and articulating a small vocabulary.
 This implementation is inspired by
@@ -1660,11 +1661,22 @@ a ten word vocabulary.
 The primary challenge in the proposed system
 is to connect all of the
 systems combined in this work.
-As seen in Figure~\ref{XXX},
-there are XXX systems,
-which must communicate together
+As seen in Figure~\ref{fig:shortterm},
+seven systems must communicate together
 through some protocol.
-XXXProtocols
+To ease communication,
+all of these systems will be implemented
+through a dynamical systems description
+that can be implemented
+in a spiking neural network.
+While five of the seven systems
+(all but the Zilany model
+and Birholz synthesizer)
+have been expressed in this way
+in the past,
+communicating with the remaining two systems
+may present challenges depending on
+implementation details.
 
 Within these systems,
 necessary modifications provide
@@ -1743,7 +1755,7 @@ in terms of parallelizing expensive computations
 and reducing the number of data conversions
 that have to occur.
 
-XXX improve on this obviously
+XXX more?
 
 \bibliographystyle{plainnat}
 \bibliography{proposal}
