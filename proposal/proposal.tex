@@ -178,7 +178,7 @@ as shown in Figure~\ref{fig:recognition}.
   \begin{center}
     \includegraphics[width=1.0\linewidth]{recognition}
   \end{center}
-  \caption{Speech recognition pipeline.}
+  \caption{Pipeline used in many speech recognition systems.}
   \label{fig:recognition}
 \end{figure}
 
@@ -333,7 +333,26 @@ whose axons form the auditory nerve
   \begin{center}
     \includegraphics[width=1\linewidth]{periphery-anatomy}
   \end{center}
-  \caption{Anatomy of the auditory periphery.}
+  \caption{Anatomy of the human auditory periphery.
+    (Left) A view of the outer and inner ear.
+    Pressure waves travel down the auditory canal,
+    causing the tympanic membrane to vibrate.
+    Those vibrations translate to movements of the stapes,
+    causing disturbances in the fluid of the cochlea.
+    Those disturbances cause parts of the cochlea
+    to be deformed; high-frequency sounds cause
+    deformations at the base of the cochlea,
+    while low-frequency sounds cause deformations
+    at the apex (middle) of the cochlea.
+    (Right) Cross-section of the cochlea.
+    Hair cells lie on top of the basilar membrane,
+    which is deformed by the movement of the stapes.
+    As outer and inner hair cells push against the
+    tectorial membrane at different angles,
+    ion channels flow into the hair cell,
+    which is communicated to spiral ganglion cells.
+    Spiral ganglion cells send action potentials
+    through the cochlear nerve to the brain.}
   \label{fig:anatomy}
 \end{figure}
 
@@ -387,7 +406,8 @@ that travel along the auditory nerve.
   \begin{center}
     \includegraphics[width=1\linewidth]{zilany}
   \end{center}
-  \caption{Zilany model.}
+  \caption{Zilany model of the human auditory periphery.
+    See text for details.}
   \label{fig:zilany}
 \end{figure}
 
@@ -646,17 +666,6 @@ resulting from the biological exploration
 of sound production
 and produce novel predictions.
 
-\begin{wrapfigure}{l}{0.421\textwidth}
-  \vspace{-30pt}
-  \begin{center}
-    \includegraphics[width=0.42\textwidth]{birkholz}
-  \end{center}
-  \vspace{-12pt}
-  \caption{Birkholz articulatory synthesizer.}
-  \label{fig:birkholz}
-  \vspace{-20pt}
-\end{wrapfigure}
-
 Generally, articulatory speech synthesizers
 consist of three models
 \citep{kroger2009}.
@@ -774,6 +783,18 @@ of the vocal tract
 and use each muscle
 as a degree of freedom.
 
+\begin{wrapfigure}{l}{0.421\textwidth}
+  \vspace{-30pt}
+  \begin{center}
+    \includegraphics[width=0.42\textwidth]{birkholz}
+  \end{center}
+  \vspace{-12pt}
+  \caption{Birkholz articulatory synthesizer.
+    See text for details.}
+  \label{fig:birkholz}
+  \vspace{-20pt}
+\end{wrapfigure}
+
 A final class of vocal tract models
 are geometric models,
 which generalize the overall
@@ -827,14 +848,6 @@ Within these systems, the glottis model
 and the noise generated
 by air turbulence can be changed
 to modify the final synthesized audio waveform.
-
-\begin{wrapfigure}{l}{0.39\textwidth}
-  \vspace{-30pt}
-  \begin{center}
-    \includegraphics[width=0.39\textwidth]{birholz-params}
-  \end{center}
-  \vspace{-24pt}
-\end{wrapfigure}
 
 \subsubsection{Birkholz synthesizer}
 \label{subsec:birkholz}
@@ -891,6 +904,14 @@ $MA2$ & Minimum area tongue tip region & 0.0 & 0.3 & cm$^2$ \\
 $MA3$ & Minimum area lip region & 0.0 & 0.3 & cm$^2$ \\
 \bottomrule
 \end{tabular}
+
+\begin{wrapfigure}{l}{0.41\textwidth}
+  \vspace{-30pt}
+  \begin{center}
+    \includegraphics[width=0.41\textwidth]{birholz-params}
+  \end{center}
+  \vspace{-24pt}
+\end{wrapfigure}
 
 In \citet{birkholz2013}, the actions generated from
 the phonetic and prosodic representation
@@ -953,7 +974,7 @@ synthesis researchers have
 been able to discern
 plant positions over time
 for many utterances\footnote{This
-data is available for free in many cases;
+data is freely available in many cases;
 e.g., the \textit{mngu0} data set,
 available at \url{http://www.mngu0.org/}},
 but the question of how humans
@@ -1040,7 +1061,7 @@ methods than would be necessary
 to do state of the art
 speech recognition and synthesis,
 the overall structure of the model
-(shown in Figure~\ref{fig:loop})
+(shown in Figure~\ref{fig:kroger})
 serves as a good starting point
 for a closed-loop speech model.
 In particular, \citeauthor{kroger2009} have
@@ -1065,20 +1086,17 @@ to human babbling.
     \includegraphics[width=0.8\linewidth]{kroger}
   \end{center}
   \caption{\citeauthor{kroger2009}'s closed loop model.}
-  \label{fig:kroeger}
+  \label{fig:kroger}
 \end{figure}
 
-While \citeauthor{kroger2009}
-do not term this structure
-as hierarchical,
-it is hierarchical
-(e.g., the high-dimensional acoustic
-signal is reduced to a lower-dimensional
-auditory map).
+\citeauthor{kroger2009}'s model
+is hierarchical; high-dimensional information
+reduced to a lower-dimensional representation
+using maps.
 Similar hierarchies have been explored
 in other projects by members of the
 Computational Neuroscience Research Group
-(e.g., \citealp{eliasmith2012,dewolf2011,rasmussen-inpress}).
+(e.g., \citealp{eliasmith2012,dewolf2011}).
 
 Other closed-loop models
 have been proposed
@@ -1162,19 +1180,40 @@ but not production,
 just as we might expect
 for a general well-trained motor action
 in the human brain
-\citep{fiete2008}.
+(see Figure~\ref{fig:birdsong} from \citealp{fiete2008}).
 Spiking neural models have been proposed
 in the context of this pathway
 that produce sequences of firing patterns,
-as observed in the avian brain
-(see Figure~\ref{fig:birdsong} from \citealp{fiete2008}).
+as observed in the avian brain.
 
 \begin{figure}
   \begin{center}
-    XXX
-    %\includegraphics[width=0.9\linewidth]{birdsong}
+    \includegraphics[width=0.85\linewidth]{birdsong}
   \end{center}
-  \caption{Birdsong}
+  \caption{Neuroanatomy of the avian song learning and production system.
+    The \textbf{premotor pathway} is responsible for song production.
+    The \textit{HVC} (not an acronym, but sometimes referred to as the
+    High Vocal Center) receives input from peripheral auditory nuclei
+    and recurrent activity from motor areas;
+    it communicates a temporal sequence to the
+    \textit{RA} (premotor nucleus) which projects to the
+    \textit{nXIIts} (a part of the hypoglossal nerve),
+    which controls muscle contractions in the syrinx
+    (the syrinx produces sounds and is analogous
+    to the human larynx).
+    The \textbf{anterior forebrain pathway} is responsible for
+    song learning.
+    This pathway also begins with the \textit{HVC}.
+    The sequence projects to \textit{Area X},
+    which is a homologue to the human basal ganglia.
+    Similar to human neuroanatomy,
+    Area X projects to \textit{DLM}
+    (dorsolateral medial thalamus; thalamus homologue),
+    which projects to \textit{LMAN}
+    (lateral magnocellular nucleus of anterior neostriatum;
+    cortex homologue).
+    The LMAN links the learning and production systems
+    through projections to the RA.}
   \label{fig:birdsong}
 \end{figure}
 
@@ -1304,12 +1343,12 @@ and showed that the error minimization
 can be done more effectively with
 the unsupervised component
 \citep{bekolay2013}.
-Recently, \citeauthor{crawford-inpress}
-has experimented
+Other members of the CNRG,
+have recently experimented
 with other unsupervised rules
 and implemented them
 in a more scalable and efficient manner
-\citep{crawford-inpress}.
+(E. Crawford, personal communication).
 
 \section{Proposal}
 \label{sec:proposal}
@@ -1339,8 +1378,9 @@ of a simulated vocal tract.
   \begin{center}
     \includegraphics[width=0.7\linewidth]{longterm}
   \end{center}
-  \caption{Long-term goal for a system consisting
-    of interacting recognition and synthesis systems.}
+  \caption{Long-term goal of this line of research: a system consisting
+    of interacting recognition and synthesis systems,
+    allowing for human-like interaction with an artificial system.}
   \label{fig:longterm}
 \end{figure}
 
@@ -1349,8 +1389,22 @@ in a single unified system
 allows for many feedback connections,
 both within each hierarchy
 and between them.
-For example,
-XXX go over a few possible interactions
+For example, within the recognition hierarchy,
+word sequences could be fed back through
+the hierarchy to generate
+the phoneme sequence corresponding
+to that word sequence,
+which may be a better representation
+to send to the control system.
+Word sequences can
+be stored in short term memory
+while being uttered.
+While the phoneme may be
+generating the control signal,
+the audio frame that results from
+the voiced utterance can be compared
+to the desired utterance
+to improve control.
 
 This type of large-scale unified system
 is a good long-term goal,
@@ -1358,7 +1412,7 @@ but is not a reasonable
 goal in the span of a PhD.
 My PhD project is a subset
 of that long-term goal.
-It still requires the interaction of both hierarchies,
+It requires the interaction of both hierarchies,
 and it can serve as a starting point
 for future work towards a large-scale
 unified model of human speech.
@@ -1391,8 +1445,12 @@ in order to determine appropriate control signals.
   \begin{center}
     \includegraphics[width=0.7\linewidth]{shortterm}
   \end{center}
-  \caption{Short-term goal for a system consisting
-    of interacting recognition and synthesis systems.}
+  \caption{Short-term goal of this line of research:
+    a system consisting of interacting
+    recognition and synthesis systems
+    that recognizes a small vocabulary of words,
+    remembers them, and trains itself to voice
+    that same vocabulary with no prior knowledge.}
   \label{fig:shortterm}
 \end{figure}
 
@@ -1686,7 +1744,14 @@ temporal information
 must be incorporated in
 a system that has been used
 to classify static vectors.
-XXX ideas?
+Temporal classification
+of audio signals
+has been done previously using
+recurrent neural networks
+\citep{graves2006};
+these methods will be
+incorporated into the existing
+classification system.
 
 Some of the proposed systems
 can be trained in different ways
@@ -1755,9 +1820,41 @@ in terms of parallelizing expensive computations
 and reducing the number of data conversions
 that have to occur.
 
-XXX more?
+While making the best recognizer or synthesizer
+is not our explicit goal,
+this work will still make contributions
+to speech recognition and synthesis individually.
+On the recognition side,
+we will be the first to use
+the Zilany model as a frontend
+to a speech recognition system.
+While all frontends attempt to
+replicate the function of the human ear,
+the Zilany model replicates it
+to the point that it is used
+in cochlear implants.
+It may be an ideal frontend
+to a speech recognition hierarchy.
+On the synthesis side,
+articulatory synthesizers
+have a long history,
+yet still cannot be optimally controlled.
+Providing a method for
+optimal or near optimal control
+of arbitrary articulatory synthesizers
+will enable apples-to-apples comparisons.
+At the moment, articulatory synthesizers
+are difficult to compare to one another
+because they depend partly
+on how well they are being controlled.
+However, with a good control method,
+synthesizers can be evaluated
+for the quantitative error between
+a target utterance
+and the synthesized version
+in the ideal case of optimal control.
 
-\bibliographystyle{plainnat}
+\bibliographystyle{abbrvnat}
 \bibliography{proposal}
 
 \end{document}
