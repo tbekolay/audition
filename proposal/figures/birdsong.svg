@@ -33,7 +33,7 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1719"
+     inkscape:window-width="1718"
      inkscape:window-height="1116"
      id="namedview4"
      showgrid="false"
@@ -41,10 +41,10 @@
      fit-margin-left="3"
      fit-margin-right="3"
      fit-margin-bottom="3"
-     inkscape:zoom="1.9070707"
-     inkscape:cx="230.06615"
-     inkscape:cy="47.567683"
-     inkscape:window-x="2002"
+     inkscape:zoom="3.8141414"
+     inkscape:cx="153.86084"
+     inkscape:cy="74.908823"
+     inkscape:window-x="2003"
      inkscape:window-y="1"
      inkscape:window-maximized="0"
      inkscape:current-layer="g10" /><g
@@ -353,7 +353,7 @@
          id="tspan3255-12"
          x="147.4682"
          y="-439.20068"
-         style="font-size:7.19999981px">nXllts</tspan></text>
+         style="font-size:7.19999981px">nXIIts</tspan></text>
 <text
        xml:space="preserve"
        style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
@@ -540,7 +540,8 @@
          y="-447.95804"
          style="font-size:7.19999981px">Cortex</tspan></text>
 <g
-       id="g4375"><path
+       id="g3128"
+       transform="translate(-8,12.8)"><path
          d="m 149.453,385.797 c 0,-3.769 -3.283,-6.827 -7.328,-6.827 -4.045,0 -7.327,3.058 -7.327,6.827 0,3.769 3.282,6.827 7.327,6.827 4.045,0 7.328,-3.058 7.328,-6.827 l 0,0"
          style="fill:#94ff7f;fill-opacity:1;fill-rule:nonzero;stroke:none"
          id="path42"
@@ -553,23 +554,23 @@
          style="fill:none;stroke:#0000ff;stroke-width:0.89368403;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none"
          id="path46"
          inkscape:connector-curvature="0" /><path
-         d="m 197.362,384.677 21.117,0"
+         d="m 245.362,384.677 21.117,0"
          style="fill:none;stroke:#000000;stroke-width:1.11141002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none"
          id="path236"
          inkscape:connector-curvature="0" /><path
-         d="m 218.479,382.588 c 1.153,0 2.089,0.935 2.089,2.089 0,1.154 -0.936,2.089 -2.089,2.089 -1.155,0 -2.09,-0.935 -2.09,-2.089 0,-1.154 0.935,-2.089 2.09,-2.089"
+         d="m 266.479,382.588 c 1.153,0 2.089,0.935 2.089,2.089 0,1.154 -0.936,2.089 -2.089,2.089 -1.155,0 -2.09,-0.935 -2.09,-2.089 0,-1.154 0.935,-2.089 2.09,-2.089"
          style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
          id="path238"
          inkscape:connector-curvature="0" /><path
-         d="m 219.034,399.681 -20.968,0"
+         d="m 267.034,399.681 -20.968,0"
          style="fill:none;stroke:#000000;stroke-width:1.11141002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none"
          id="path240"
          inkscape:connector-curvature="0" /><path
-         d="m 220.734,399.681 c -1.787,0.703 -4.003,1.901 -5.377,3.171 l 1.083,-3.171 -1.083,-3.171 c 1.374,1.269 3.59,2.469 5.377,3.171"
+         d="m 268.734,399.681 c -1.787,0.703 -4.003,1.901 -5.377,3.171 l 1.083,-3.171 -1.083,-3.171 c 1.374,1.269 3.59,2.469 5.377,3.171"
          style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
          id="path242"
          inkscape:connector-curvature="0" /><path
-         d="m 220.734,399.681 c -1.787,0.703 -4.003,1.901 -5.377,3.171 l 1.083,-3.171 -1.083,-3.171 c 1.374,1.269 3.59,2.469 5.377,3.171 z"
+         d="m 268.734,399.681 c -1.787,0.703 -4.003,1.901 -5.377,3.171 l 1.083,-3.171 -1.083,-3.171 c 1.374,1.269 3.59,2.469 5.377,3.171 z"
          style="fill:none;stroke:#000000;stroke-width:0.55570501;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
          id="path244"
          inkscape:connector-curvature="0" /><text
@@ -597,18 +598,18 @@
            y="-383.22003"
            x="152.7294"
            id="tspan3255-87-6-1"
-           sodipodi:role="line">AFP</tspan></text>
+           sodipodi:role="line">Anterior forebrain pathway</tspan></text>
 <text
          transform="scale(1,-1)"
          sodipodi:linespacing="125%"
          id="text3253-19-98-82"
          y="-397.74734"
-         x="226.38258"
+         x="274.38257"
          style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
          xml:space="preserve"><tspan
            style="font-size:7.19999981px"
            y="-397.74734"
-           x="226.38258"
+           x="274.38257"
            id="tspan3255-87-6-9"
            sodipodi:role="line">Excitatory</tspan></text>
 <text
@@ -616,12 +617,12 @@
          sodipodi:linespacing="125%"
          id="text3253-19-98-5"
          y="-382.53873"
-         x="226.28062"
+         x="274.28064"
          style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
          xml:space="preserve"><tspan
            style="font-size:7.19999981px"
            y="-382.53873"
-           x="226.28062"
+           x="274.28064"
            id="tspan3255-87-6-2"
            sodipodi:role="line">Inhibitory</tspan></text>
 </g><g
