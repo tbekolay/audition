@@ -5,7 +5,18 @@
 ** DONE Read Zilany, 2006
 ** DONE Outline of Comp-II
 ** DONE Read Zilany, 2014
-* Comp-II
+* Comp-II feedback
+** Look into computational linguistics / psycholinguistics literature
+** What kind of language acquisition is this model doing?
+*** How can we communicate this work to linguists?
+*** Is this similar to second language acquisition?
+*** Is this similar to relearning speech after a stroke?
+** How best to teach the system explicitly?
+** How much is this a statistical problem versus a control problem?
+** What is the CS contribution?
+*** Mostly in the implementation?
+** Idea: train the model in one language, test it in another
+** Use a richer set of words; i.e., some with vowel reuse (spanish digits?)
 * Post Comp-II
 ** Make an IPython notebook to play around with eqs in Zilany, 2006
 ** Read Guenther, 1995
