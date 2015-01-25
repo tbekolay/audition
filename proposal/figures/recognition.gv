@@ -1,6 +1,6 @@
 digraph recognition {
   rankdir=LR
-  graph [fontname="Arial"]
+  graph [fontname="Arial",bgcolor="transparent"]
   node [colorscheme=pastel14, color=4]
   node [shape=rect, style="rounded,filled", penwidth=0]
   node [fontname="Arial"]
