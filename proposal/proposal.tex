@@ -299,7 +299,10 @@ Briefly, the auditory periphery
 is responsible for sensing pressure waves
 in the air and transducing them into
 neural signals that we perceive as sound.
-As seen in Figure~\ref{fig:anatomy},
+As seen in Figure~\ref{fig:anatomy}\footnote{Figure~\ref{fig:anatomy}
+  adapted from
+  \url{http://commons.wikimedia.org/wiki/File:Anatomy_of_the_Human_Ear.svg}
+  and \url{http://en.academic.ru/dic.nsf/enwiki/1472779}},
 air pressure waves are funneled into the auditory canal,
 causing the tympanic membrane (eardrum)
 to vibrate, which causes the stapes
@@ -408,8 +411,8 @@ that travel along the auditory nerve.
   \begin{center}
     \includegraphics[width=1\linewidth]{zilany}
   \end{center}
-  \caption{Zilany model of the human auditory periphery.
-    See text for details.}
+  \caption{Zilany model of the human auditory periphery
+    \citep{zilany2006}. See text for details.}
   \label{fig:zilany}
 \end{figure}
 
@@ -765,6 +768,18 @@ can be of relatively low dimensionality
 while still producing a full
 3D representation of a vocal tract.
 
+\begin{wrapfigure}{l}{0.421\textwidth}
+  \vspace{-30pt}
+  \begin{center}
+    \includegraphics[width=0.42\textwidth]{birkholz}
+  \end{center}
+  \vspace{-12pt}
+  \caption{Birkholz articulatory synthesizer
+    \citep{birkholz2013}. See text for details.}
+  \label{fig:birkholz}
+  \vspace{-20pt}
+\end{wrapfigure}
+
 Another class of vocal tract models
 are biomechanical models,
 which attempt to fully reconstruct
@@ -784,18 +799,6 @@ muscle activations affect the shape
 of the vocal tract
 and use each muscle
 as a degree of freedom.
-
-\begin{wrapfigure}{l}{0.421\textwidth}
-  \vspace{-30pt}
-  \begin{center}
-    \includegraphics[width=0.42\textwidth]{birkholz}
-  \end{center}
-  \vspace{-12pt}
-  \caption{Birkholz articulatory synthesizer.
-    See text for details.}
-  \label{fig:birkholz}
-  \vspace{-20pt}
-\end{wrapfigure}
 
 A final class of vocal tract models
 are geometric models,
@@ -850,6 +853,16 @@ Within these systems, the glottis model
 and the noise generated
 by air turbulence can be changed
 to modify the final synthesized audio waveform.
+
+\clearpage
+
+\begin{wrapfigure}{l}{0.41\textwidth}
+  \vspace{-30pt}
+  \begin{center}
+    \includegraphics[width=0.41\textwidth]{birholz-params}
+  \end{center}
+  \vspace{-24pt}
+\end{wrapfigure}
 
 \subsubsection{Birkholz synthesizer}
 \label{subsec:birkholz}
@@ -906,14 +919,6 @@ $MA2$ & Minimum area tongue tip region & 0.0 & 0.3 & cm$^2$ \\
 $MA3$ & Minimum area lip region & 0.0 & 0.3 & cm$^2$ \\
 \bottomrule
 \end{tabular}
-
-\begin{wrapfigure}{l}{0.41\textwidth}
-  \vspace{-30pt}
-  \begin{center}
-    \includegraphics[width=0.41\textwidth]{birholz-params}
-  \end{center}
-  \vspace{-24pt}
-\end{wrapfigure}
 
 In \citet{birkholz2013}, the actions generated from
 the phonetic and prosodic representation
@@ -1087,7 +1092,8 @@ to human babbling.
   \begin{center}
     \includegraphics[width=0.8\linewidth]{kroger}
   \end{center}
-  \caption{\citeauthor{kroger2009}'s closed loop model.}
+  \caption{\citeauthor{kroger2009}'s closed loop model
+    \citep{kroger2009}.}
   \label{fig:kroger}
 \end{figure}
 
@@ -1182,7 +1188,7 @@ but not production,
 just as we might expect
 for a general well-trained motor action
 in the human brain
-(see Figure~\ref{fig:birdsong} from \citealp{fiete2008}).
+(see Figure~\ref{fig:birdsong}).
 Spiking neural models have been proposed
 in the context of this pathway
 that produce sequences of firing patterns,
@@ -1215,7 +1221,8 @@ as observed in the avian brain.
     (lateral magnocellular nucleus of anterior neostriatum;
     cortex homologue).
     The LMAN links the learning and production systems
-    through projections to the RA.}
+    through projections to the RA.
+    Adapted from \citet{fiete2008}.}
   \label{fig:birdsong}
 \end{figure}
 
