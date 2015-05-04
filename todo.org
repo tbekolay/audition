@@ -22,3 +22,17 @@
 ** Read Guenther, 1995
 ** Read Howard & Messum, 2011
 ** Replicate results in Fiete & Seung, 2007
+* Thesis
+** Add somewhere
+From Leah Krubitzer paper in 'future of the brain':
+
+"Studies on animals that are highly specialized also inform us
+about the importance of use of this specialized body morphology
+in constructing the brain during development
+and the dynamics in shaping the neocortex as an organism matures to adulthood.
+If we consider human specializations in this same light,
+we would conclude that specializations of the vocal tract
+and oral structures associated with speech production
+have a large portion of the neocortex devoted to processing these inputs,
+and these areas have altered connections associated
+with these specializations--and, they do."
